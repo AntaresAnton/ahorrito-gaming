@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Categorías - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .form-control, .form-select {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #fff;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            border-color: #7b4cff;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+        
+        .modal-content {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+        
+        .modal-header, .modal-footer {
+            border-color: #333;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #2d2d2d;
+            color: #7b4cff;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link text-white">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link text-white">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link text-white">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Administración de Categorías</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        <i class="fas fa-plus me-2"></i>Agregar Categoría
+                    </button>
+                </div>
+                
+                <!-- Categories -->
+                <div class="row g-4">
+                    <!-- Categorías de Género -->
+                    <div class="col-md-6">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Categorías de Género</h5>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                    <i class="fas fa-plus me-1"></i>Agregar
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Icono</th>
+                                                <th>Nombre</th>
+                                                <th>Productos</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CAT-001</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-fist-raised"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Acción</td>
+                                                <td>145</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT-002</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-dragon"></i>
+                                                    </div>
+                                                </td>
+                                                <td>RPG</td>
+                                                <td>98</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT-003</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-car"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Carreras</td>
+                                                <td>56</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT-004</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-futbol"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Deportes</td>
+                                                <td>42</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT-005</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-ghost"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Terror</td>
+                                                <td>35</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CAT-006</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-chess"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Estrategia</td>
+                                                <td>28</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Categorías de Plataforma -->
+                    <div class="col-md-6">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Categorías de Plataforma</h5>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                    <i class="fas fa-plus me-1"></i>Agregar
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Icono</th>
+                                                <th>Nombre</th>
+                                                <th>Productos</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>PLT-001</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-desktop"></i>
+                                                    </div>
+                                                </td>
+                                                <td>PC</td>
+                                                <td>320</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PLT-002</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fab fa-playstation"></i>
+                                                    </div>
+                                                </td>
+                                                <td>PlayStation</td>
+                                                <td>245</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PLT-003</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fab fa-xbox"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Xbox</td>
+                                                <td>180</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PLT-004</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-gamepad"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Nintendo</td>
+                                                <td>120</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Categorías Especiales -->
+                    <div class="col-md-12">
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Categorías Especiales</h5>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                    <i class="fas fa-plus me-1"></i>Agregar
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Icono</th>
+                                                <th>Nombre</th>
+                                                <th>Productos</th>
+                                                <th>Estado</th>
+                                                <th>Destacado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ESP-001</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-tag"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Ofertas</td>
+                                                <td>85</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ESP-002</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-calendar-alt"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Pre-compras</td>
+                                                <td>24</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ESP-003</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-puzzle-piece"></i>
+                                                    </div>
+                                                </td>
+                                                <td>DLCs</td>
+                                                <td>68</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ESP-004</td>
+                                                <td>
+                                                    <div class="category-icon">
+                                                        <i class="fas fa-gift"></i>
+                                                    </div>
+                                                </td>
+                                                <td>Gift Cards</td>
+                                                <td>32</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">Agregar Nueva Categoría</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="categoryType" class="form-label">Tipo de Categoría</label>
+                            <select class="form-select" id="categoryType" required>
+                                <option value="">Seleccionar tipo...</option>
+                                <option value="genre">Género</option>
+                                <option value="platform">Plataforma</option>
+                                <option value="special">Especial</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="categoryName" placeholder="Nombre de la categoría" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryIcon" class="form-label">Icono</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-icons"></i></span>
+                                <input type="text" class="form-control" id="categoryIcon" placeholder="fa-gamepad">
+                                <button class="btn btn-outline-secondary" type="button" id="iconPicker">Seleccionar</button>
+                            </div>
+                            <small class="form-text text-muted">Ingresa el nombre del icono de Font Awesome (ej: fa-gamepad)</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="categoryDescription" rows="3" placeholder="Descripción de la categoría"></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="categoryFeatured">
+                            <label class="form-check-label" for="categoryFeatured">Destacar en página principal</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="categoryActive" checked>
+                            <label class="form-check-label" for="categoryActive">Activo</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+</body>
+</html>

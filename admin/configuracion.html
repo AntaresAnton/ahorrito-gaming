@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .form-control, .form-select {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #fff;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            border-color: #7b4cff;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link text-white">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link text-white">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link text-white">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <h2 class="mb-4">Configuración</h2>
+                
+                <!-- Settings Tabs -->
+                <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">General</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="store-tab" data-bs-toggle="tab" data-bs-target="#store" type="button" role="tab">Tienda</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab">Pagos</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab">Envíos</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button" role="tab">Email</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">Usuarios</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced" type="button" role="tab">Avanzado</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="settingsTabsContent">
+                    <!-- General Settings -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Información de la Tienda</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="storeName" class="form-label">Nombre de la Tienda</label>
+                                            <input type="text" class="form-control" id="storeName" value="Ahorrito Gaming">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="storeTagline" class="form-label">Eslogan</label>
+                                            <input type="text" class="form-control" id="storeTagline" value="Tu tienda de juegos digitales en Chile">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="storeEmail" class="form-label">Email de Contacto</label>
+                                            <input type="email" class="form-control" id="storeEmail" value="contacto@ahorritogaming.cl">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="storePhone" class="form-label">Teléfono</label>
+                                            <input type="tel" class="form-control" id="storePhone" value="+56 9 1234 5678">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeAddress" class="form-label">Dirección</label>
+                                        <input type="text" class="form-control" id="storeAddress" value="Av. Providencia 1234, Providencia, Santiago">
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="storeCity" class="form-label">Ciudad</label>
+                                            <input type="text" class="form-control" id="storeCity" value="Santiago">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="storeRegion" class="form-label">Región</label>
+                                            <input type="text" class="form-control" id="storeRegion" value="Metropolitana">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="storePostalCode" class="form-label">Código Postal</label>
+                                            <input type="text" class="form-control" id="storePostalCode" value="7500000">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeDescription" class="form-label">Descripción de la Tienda</label>
+                                        <textarea class="form-control" id="storeDescription" rows="3">Ahorrito Gaming es tu tienda de confianza para comprar juegos digitales al mejor precio en Chile. Ofrecemos más de 10.000 juegos para todas las plataformas con entrega instantánea y soporte 24/7.</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Logotipo e Imágenes</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Logotipo Actual</label>
+                                            <div class="text-center p-3 bg-dark border border-secondary rounded mb-2">
+                                                <img src="https://placehold.co/200x80?text=Ahorrito+Gaming" alt="Logo" class="img-fluid">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="storeLogo" class="form-label">Cambiar Logotipo</label>
+                                                <input class="form-control" type="file" id="storeLogo">
+                                                <small class="text-muted">Formatos recomendados: PNG, SVG. Tamaño máximo: 2MB.</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Favicon Actual</label>
+                                            <div class="text-center p-3 bg-dark border border-secondary rounded mb-2">
+                                                <img src="https://placehold.co/64x64?text=AG" alt="Favicon" width="64" height="64">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="storeFavicon" class="form-label">Cambiar Favicon</label>
+                                                <input class="form-control" type="file" id="storeFavicon">
+                                                <small class="text-muted">Formatos recomendados: ICO, PNG. Tamaño: 32x32 o 64x64 píxeles.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Redes Sociales</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="socialFacebook" class="form-label">Facebook</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
+                                                <input type="text" class="form-control" id="socialFacebook" value="https://facebook.com/ahorritogaming">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="socialTwitter" class="form-label">Twitter</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                                                <input type="text" class="form-control" id="socialTwitter" value="https://twitter.com/ahorritogaming">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="socialInstagram" class="form-label">Instagram</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                                                <input type="text" class="form-control" id="socialInstagram" value="https://instagram.com/ahorritogaming">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="socialYoutube" class="form-label">YouTube</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+                                                <input type="text" class="form-control" id="socialYoutube" value="https://youtube.com/ahorritogaming">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="socialDiscord" class="form-label">Discord</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-discord"></i></span>
+                                                <input type="text" class="form-control" id="socialDiscord" value="https://discord.gg/ahorritogaming">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="socialTiktok" class="form-label">TikTok</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fab fa-tiktok"></i></span>
+                                                <input type="text" class="form-control" id="socialTiktok" value="https://tiktok.com/@ahorritogaming">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Store Settings -->
+                    <div class="tab-pane fade" id="store" role="tabpanel" aria-labelledby="store-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración de la Tienda</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="storeCurrency" class="form-label">Moneda</label>
+                                            <select class="form-select" id="storeCurrency">
+                                                <option value="CLP" selected>Peso Chileno (CLP)</option>
+                                                <option value="USD">Dólar Estadounidense (USD)</option>
+                                                <option value="EUR">Euro (EUR)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="storeLanguage" class="form-label">Idioma</label>
+                                            <select class="form-select" id="storeLanguage">
+                                                <option value="es-CL" selected>Español (Chile)</option>
+                                                <option value="en-US">Inglés (Estados Unidos)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="storeTimezone" class="form-label">Zona Horaria</label>
+                                            <select class="form-select" id="storeTimezone">
+                                                <option value="America/Santiago" selected>Santiago (GMT-4)</option>
+                                                <option value="America/Argentina/Buenos_Aires">Buenos Aires (GMT-3)</option>
+                                                <option value="America/Bogota">Bogotá (GMT-5)</option>
+                                                <option value="America/Mexico_City">Ciudad de México (GMT-6)</option>
+                                                <option value="America/New_York">Nueva York (GMT-5)</option>
+                                                <option value="Europe/Madrid">Madrid (GMT+1)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="storeDateFormat" class="form-label">Formato de Fecha</label>
+                                            <select class="form-select" id="storeDateFormat">
+                                                <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeItemsPerPage" class="form-label">Productos por Página</label>
+                                        <select class="form-select" id="storeItemsPerPage">
+                                            <option value="12">12</option>
+                                            <option value="24" selected>24</option>
+                                            <option value="36">36</option>
+                                            <option value="48">48</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeShowPrices" checked>
+                                        <label class="form-check-label" for="storeShowPrices">Mostrar precios con impuestos incluidos</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeEnableReviews" checked>
+                                        <label class="form-check-label" for="storeEnableReviews">Permitir reseñas de productos</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeEnableWishlist" checked>
+                                        <label class="form-check-label" for="storeEnableWishlist">Habilitar lista de deseos</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeEnableComparisons">
+                                        <label class="form-check-label" for="storeEnableComparisons">Habilitar comparación de productos</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración de Inventario</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeManageStock" checked>
+                                        <label class="form-check-label" for="storeManageStock">Gestionar inventario</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeLowStockThreshold" class="form-label">Umbral de stock bajo</label>
+                                        <input type="number" class="form-control" id="storeLowStockThreshold" value="5">
+                                        <small class="text-muted">Recibir notificaciones cuando el stock llegue a este nivel.</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeOutOfStockBehavior" class="form-label">Comportamiento para productos sin stock</label>
+                                        <select class="form-select" id="storeOutOfStockBehavior">
+                                            <option value="hide">Ocultar productos</option>
+                                            <option value="show_unavailable" selected>Mostrar como "No disponible"</option>
+                                            <option value="allow_backorders">Permitir pedidos pendientes</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeNotifyLowStock" checked>
+                                        <label class="form-check-label" for="storeNotifyLowStock">Notificar cuando el stock esté bajo</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración SEO</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="storeSeoTitle" class="form-label">Título SEO por defecto</label>
+                                        <input type="text" class="form-control" id="storeSeoTitle" value="Ahorrito Gaming - Tu tienda de juegos digitales en Chile">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeSeoDescription" class="form-label">Descripción SEO por defecto</label>
+                                        <textarea class="form-control" id="storeSeoDescription" rows="3">Compra juegos digitales para PC, PlayStation, Xbox y Nintendo al mejor precio en Chile. Entrega instantánea y soporte 24/7.</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="storeSeoKeywords" class="form-label">Palabras clave SEO</label>
+                                        <input type="text" class="form-control" id="storeSeoKeywords" value="juegos digitales, juegos PC, juegos PlayStation, juegos Xbox, juegos Nintendo, comprar juegos, Chile">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeGenerateSitemap" checked>
+                                        <label class="form-check-label" for="storeGenerateSitemap">Generar sitemap automáticamente</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="storeEnableRichSnippets" checked>
+                                        <label class="form-check-label" for="storeEnableRichSnippets">Habilitar rich snippets para productos</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Settings -->
+                    <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Métodos de Pago</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableWebpay" checked>
+                                            <label class="form-check-label" for="enableWebpay">WebPay Plus (Transbank)</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#webpaySettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="webpaySettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="webpayCommerceCode" class="form-label">Código de Comercio</label>
+                                                <input type="text" class="form-control" id="webpayCommerceCode" value="597055555532">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="webpayApiKey" class="form-label">API Key</label>
+                                                <input type="password" class="form-control" id="webpayApiKey" value="********">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="webpayTestMode">
+                                                <label class="form-check-label" for="webpayTestMode">Modo de prueba</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableMercadoPago" checked>
+                                            <label class="form-check-label" for="enableMercadoPago">MercadoPago</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#mercadoPagoSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="mercadoPagoSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="mercadoPagoPublicKey" class="form-label">Clave Pública</label>
+                                                <input type="text" class="form-control" id="mercadoPagoPublicKey" value="TEST-12345678-abcd-efgh-ijkl-123456789012">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="mercadoPagoAccessToken" class="form-label">Access Token</label>
+                                                <input type="password" class="form-control" id="mercadoPagoAccessToken" value="********">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="mercadoPagoTestMode">
+                                                <label class="form-check-label" for="mercadoPagoTestMode">Modo de prueba</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enablePayPal" checked>
+                                            <label class="form-check-label" for="enablePayPal">PayPal</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#paypalSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="paypalSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="paypalClientId" class="form-label">Client ID</label>
+                                                <input type="text" class="form-control" id="paypalClientId" value="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRr">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="paypalSecret" class="form-label">Secret</label>
+                                                <input type="password" class="form-control" id="paypalSecret" value="********">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="paypalTestMode">
+                                                <label class="form-check-label" for="paypalTestMode">Modo de prueba</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableCrypto" checked>
+                                            <label class="form-check-label" for="enableCrypto">Criptomonedas</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="cryptoSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="cryptoProvider" class="form-label">Proveedor</label>
+                                                <select class="form-select" id="cryptoProvider">
+                                                    <option value="coinbase" selected>Coinbase Commerce</option>
+                                                    <option value="bitpay">BitPay</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="cryptoApiKey" class="form-label">API Key</label>
+                                                <input type="password" class="form-control" id="cryptoApiKey" value="********">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Criptomonedas aceptadas</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="cryptoBTC" checked>
+                                                    <label class="form-check-label" for="cryptoBTC">Bitcoin (BTC)</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="cryptoETH" checked>
+                                                    <label class="form-check-label" for="cryptoETH">Ethereum (ETH)</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="cryptoUSDT" checked>
+                                                    <label class="form-check-label" for="cryptoUSDT">Tether (USDT)</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="cryptoUSDC">
+                                                    <label class="form-check-label" for="cryptoUSDC">USD Coin (USDC)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableMach" checked>
+                                            <label class="form-check-label" for="enableMach">MACH</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#machSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="machSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="machAccount" class="form-label">Cuenta MACH</label>
+                                                <input type="text" class="form-control" id="machAccount" value="+56912345678">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="machName" class="form-label">Nombre del Titular</label>
+                                                <input type="text" class="form-control" id="machName" value="Ahorrito Gaming SpA">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración de Impuestos</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableTaxes" checked>
+                                        <label class="form-check-label" for="enableTaxes">Habilitar cálculo de impuestos</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="taxClass" class="form-label">Clase de impuesto por defecto</label>
+                                        <select class="form-select" id="taxClass">
+                                            <option value="standard" selected>Estándar (19% IVA)</option>
+                                            <option value="reduced">Reducido (0%)</option>
+                                            <option value="exempt">Exento</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pricesIncludeTax" class="form-label">Precios en la tienda</label>
+                                        <select class="form-select" id="pricesIncludeTax">
+                                            <option value="include" selected>Incluyen impuestos</option>
+                                            <option value="exclude">No incluyen impuestos</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="taxBasis" class="form-label">Base para el cálculo de impuestos</label>
+                                        <select class="form-select" id="taxBasis">
+                                            <option value="shipping" selected>Dirección de envío</option>
+                                            <option value="billing">Dirección de facturación</option>
+                                            <option value="store">Ubicación de la tienda</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Shipping Settings -->
+                    <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Opciones de Envío</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i> Nota: Para productos digitales, el envío es instantáneo por correo electrónico.
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="enablePhysicalShipping">
+                                    <label class="form-check-label" for="enablePhysicalShipping">Habilitar envío de productos físicos</label>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableChileExpress" checked>
+                                            <label class="form-check-label" for="enableChileExpress">Chilexpress</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#chileExpressSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="chileExpressSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="chileExpressApiKey" class="form-label">API Key</label>
+                                                <input type="password" class="form-control" id="chileExpressApiKey" value="********">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="chileExpressLiveRates" checked>
+                                                <label class="form-check-label" for="chileExpressLiveRates">Usar tarifas en tiempo real</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableCorreosChile" checked>
+                                            <label class="form-check-label" for="enableCorreosChile">Correos de Chile</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#correosChileSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="correosChileSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="correosChileApiKey" class="form-label">API Key</label>
+                                                <input type="password" class="form-control" id="correosChileApiKey" value="********">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="correosChileLiveRates" checked>
+                                                <label class="form-check-label" for="correosChileLiveRates">Usar tarifas en tiempo real</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableFlatRate" checked>
+                                            <label class="form-check-label" for="enableFlatRate">Tarifa Plana</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flatRateSettings">
+                                            Configurar
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="flatRateSettings">
+                                        <div class="card card-body bg-dark border-secondary">
+                                            <div class="mb-3">
+                                                <label for="flatRateAmount" class="form-label">Monto</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input type="number" class="form-control" id="flatRateAmount" value="3500">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="flatRateTitle" class="form-label">Título</label>
+                                                <input type="text" class="form-control" id="flatRateTitle" value="Envío Estándar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="freeShippingThreshold" class="form-label">Umbral para envío gratis</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="freeShippingThreshold" value="35000">
+                                    </div>
+                                    <small class="text-muted">Los pedidos que superen este monto tendrán envío gratis. Dejar en 0 para desactivar.</small>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Settings -->
+                    <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración de Email</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="emailFrom" class="form-label">Email Remitente</label>
+                                        <input type="email" class="form-control" id="emailFrom" value="no-reply@ahorritogaming.cl">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailFromName" class="form-label">Nombre Remitente</label>
+                                        <input type="text" class="form-control" id="emailFromName" value="Ahorrito Gaming">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailMethod" class="form-label">Método de Envío</label>
+                                        <select class="form-select" id="emailMethod">
+                                            <option value="smtp" selected>SMTP</option>
+                                            <option value="sendgrid">SendGrid</option>
+                                            <option value="mailgun">Mailgun</option>
+                                            <option value="ses">Amazon SES</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div id="smtpSettings">
+                                        <h6 class="border-bottom border-secondary pb-2 mb-3">Configuración SMTP</h6>
+                                        <div class="mb-3">
+                                            <label for="smtpHost" class="form-label">Host SMTP</label>
+                                            <input type="text" class="form-control" id="smtpHost" value="smtp.gmail.com">
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="smtpPort" class="form-label">Puerto SMTP</label>
+                                                <input type="number" class="form-control" id="smtpPort" value="587">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="smtpSecurity" class="form-label">Seguridad</label>
+                                                <select class="form-select" id="smtpSecurity">
+                                                    <option value="tls" selected>TLS</option>
+                                                    <option value="ssl">SSL</option>
+                                                    <option value="none">Ninguna</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="smtpUsername" class="form-label">Usuario SMTP</label>
+                                            <input type="text" class="form-control" id="smtpUsername" value="contacto@ahorritogaming.cl">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="smtpPassword" class="form-label">Contraseña SMTP</label>
+                                            <input type="password" class="form-control" id="smtpPassword" value="********">
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="button" class="btn btn-info mb-3">Enviar Email de Prueba</button>
+                                    
+                                    <h6 class="border-bottom border-secondary pb-2 mb-3">Plantillas de Email</h6>
+                                    
+                                    <div class="mb-3">
+                                        <label for="emailTemplate" class="form-label">Seleccionar Plantilla</label>
+                                        <select class="form-select" id="emailTemplate">
+                                            <option value="order_confirmation">Confirmación de Pedido</option>
+                                            <option value="order_shipped">Pedido Enviado</option>
+                                            <option value="order_completed">Pedido Completado</option>
+                                            <option value="account_created">Cuenta Creada</option>
+                                            <option value="password_reset">Restablecimiento de Contraseña</option>
+                                            <option value="abandoned_cart">Carrito Abandonado</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="emailSubject" class="form-label">Asunto</label>
+                                        <input type="text" class="form-control" id="emailSubject" value="¡Gracias por tu pedido en Ahorrito Gaming! [Pedido #{{order_id}}]">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="emailContent" class="form-label">Contenido</label>
+                                        <textarea class="form-control" id="emailContent" rows="10">Hola {{customer_name}},
+
+¡Gracias por tu compra en Ahorrito Gaming!
+
+Tu pedido #{{order_id}} ha sido recibido y está siendo procesado.
+
+Detalles del pedido:
+{{order_details}}
+
+Total: {{order_total}}
+
+Recibirás tus claves de juego en cuanto se confirme el pago.
+
+Si tienes alguna pregunta, no dudes en contactarnos.
+
+Saludos,
+El equipo de Ahorrito Gaming</textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Users Settings -->
+                    <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración de Usuarios</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="allowUserRegistration" checked>
+                                        <label class="form-check-label" for="allowUserRegistration">Permitir registro de usuarios</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="requireEmailVerification" checked>
+                                        <label class="form-check-label" for="requireEmailVerification">Requerir verificación de email</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="defaultUserRole" class="form-label">Rol de usuario por defecto</label>
+                                        <select class="form-select" id="defaultUserRole">
+                                            <option value="customer" selected>Cliente</option>
+                                            <option value="contributor">Colaborador</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="passwordMinLength" class="form-label">Longitud mínima de contraseña</label>
+                                        <input type="number" class="form-control" id="passwordMinLength" value="8">
+
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="passwordRequireSpecial" checked>
+                                        <label class="form-check-label" for="passwordRequireSpecial">Requerir caracteres especiales en contraseñas</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="passwordRequireNumbers" checked>
+                                        <label class="form-check-label" for="passwordRequireNumbers">Requerir números en contraseñas</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="accountLockoutAttempts" class="form-label">Intentos fallidos antes de bloqueo</label>
+                                        <input type="number" class="form-control" id="accountLockoutAttempts" value="5">
+                                        <small class="text-muted">Establecer a 0 para desactivar el bloqueo de cuentas.</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="accountLockoutTime" class="form-label">Tiempo de bloqueo (minutos)</label>
+                                        <input type="number" class="form-control" id="accountLockoutTime" value="30">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Roles y Permisos</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Rol</th>
+                                                <th>Ver Productos</th>
+                                                <th>Editar Productos</th>
+                                                <th>Ver Pedidos</th>
+                                                <th>Gestionar Pedidos</th>
+                                                <th>Ver Clientes</th>
+                                                <th>Configuración</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Administrador</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gerente</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Editor</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cliente</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-success mt-3">
+                                    <i class="fas fa-plus me-2"></i>Añadir Nuevo Rol
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Settings -->
+                    <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+                        <div class="card bg-dark border-secondary mb-4">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Configuración Avanzada</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i> Advertencia: Estos ajustes son para usuarios avanzados. Cambiarlos incorrectamente puede afectar el funcionamiento de la tienda.
+                                </div>
+                                
+                                <form>
+                                    <h6 class="border-bottom border-secondary pb-2 mb-3">Caché y Rendimiento</h6>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableCache" checked>
+                                        <label class="form-check-label" for="enableCache">Habilitar caché</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cacheLifetime" class="form-label">Tiempo de vida del caché (minutos)</label>
+                                        <input type="number" class="form-control" id="cacheLifetime" value="60">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableMinification" checked>
+                                        <label class="form-check-label" for="enableMinification">Habilitar minificación de CSS/JS</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableLazyLoading" checked>
+                                        <label class="form-check-label" for="enableLazyLoading">Habilitar carga diferida de imágenes</label>
+                                    </div>
+                                    
+                                    <h6 class="border-bottom border-secondary pb-2 mb-3 mt-4">Seguridad</h6>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableCaptcha" checked>
+                                        <label class="form-check-label" for="enableCaptcha">Habilitar CAPTCHA en formularios</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="captchaType" class="form-label">Tipo de CAPTCHA</label>
+                                        <select class="form-select" id="captchaType">
+                                            <option value="recaptcha" selected>Google reCAPTCHA</option>
+                                            <option value="hcaptcha">hCaptcha</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recaptchaSiteKey" class="form-label">reCAPTCHA Site Key</label>
+                                        <input type="text" class="form-control" id="recaptchaSiteKey" value="6LcXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recaptchaSecretKey" class="form-label">reCAPTCHA Secret Key</label>
+                                        <input type="password" class="form-control" id="recaptchaSecretKey" value="********">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableCSRFProtection" checked>
+                                        <label class="form-check-label" for="enableCSRFProtection">Habilitar protección CSRF</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableXSSProtection" checked>
+                                        <label class="form-check-label" for="enableXSSProtection">Habilitar protección XSS</label>
+                                    </div>
+                                    
+                                    <h6 class="border-bottom border-secondary pb-2 mb-3 mt-4">API y Integraciones</h6>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableAPI" checked>
+                                        <label class="form-check-label" for="enableAPI">Habilitar API REST</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="apiTokenLifetime" class="form-label">Tiempo de vida del token API (días)</label>
+                                        <input type="number" class="form-control" id="apiTokenLifetime" value="30">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableWebhooks">
+                                        <label class="form-check-label" for="enableWebhooks">Habilitar webhooks</label>
+                                    </div>
+                                    
+                                    <h6 class="border-bottom border-secondary pb-2 mb-3 mt-4">Mantenimiento</h6>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="enableMaintenanceMode">
+                                        <label class="form-check-label" for="enableMaintenanceMode">Activar modo mantenimiento</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="maintenanceMessage" class="form-label">Mensaje de mantenimiento</label>
+                                        <textarea class="form-control" id="maintenanceMessage" rows="3">Estamos realizando tareas de mantenimiento. Por favor, vuelve más tarde.</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="debugMode" class="form-label">Modo de depuración</label>
+                                        <select class="form-select" id="debugMode">
+                                            <option value="off" selected>Desactivado</option>
+                                            <option value="admin">Solo administradores</option>
+                                            <option value="all">Todos los usuarios</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="fas fa-trash me-2"></i>Limpiar Caché
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Email method change handler
+            document.getElementById('emailMethod').addEventListener('change', function() {
+                const smtpSettings = document.getElementById('smtpSettings');
+                if (this.value === 'smtp') {
+                    smtpSettings.style.display = 'block';
+                } else {
+                    smtpSettings.style.display = 'none';
+                }
+            });
+            
+            // Email template change handler
+            document.getElementById('emailTemplate').addEventListener('change', function() {
+                const template = this.value;
+                const subjectField = document.getElementById('emailSubject');
+                const contentField = document.getElementById('emailContent');
+                
+                // Simulated templates - in a real app, these would be loaded from the server
+                if (template === 'order_confirmation') {
+                    subjectField.value = '¡Gracias por tu pedido en Ahorrito Gaming! [Pedido #{{order_id}}]';
+                    contentField.value = 'Hola {{customer_name}},\n\n¡Gracias por tu compra en Ahorrito Gaming!\n\nTu pedido #{{order_id}} ha sido recibido y está siendo procesado.\n\nDetalles del pedido:\n{{order_details}}\n\nTotal: {{order_total}}\n\nRecibirás tus claves de juego en cuanto se confirme el pago.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\nSaludos,\nEl equipo de Ahorrito Gaming';
+                } else if (template === 'order_shipped') {
+                    subjectField.value = '¡Tu pedido ha sido enviado! [Pedido #{{order_id}}]';
+                    contentField.value = 'Hola {{customer_name}},\n\n¡Buenas noticias! Tu pedido #{{order_id}} ha sido enviado.\n\nPuedes seguir tu envío con el siguiente número de seguimiento: {{tracking_number}}\n\nEnlace de seguimiento: {{tracking_link}}\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\nSaludos,\nEl equipo de Ahorrito Gaming';
+                } else if (template === 'account_created') {
+                    subjectField.value = 'Bienvenido a Ahorrito Gaming - Tu cuenta ha sido creada';
+                    contentField.value = 'Hola {{customer_name}},\n\n¡Bienvenido a Ahorrito Gaming!\n\nTu cuenta ha sido creada exitosamente. Ahora puedes iniciar sesión y comenzar a disfrutar de los mejores juegos digitales al mejor precio.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\nSaludos,\nEl equipo de Ahorrito Gaming';
+                } else if (template === 'password_reset') {
+                    subjectField.value = 'Restablecimiento de contraseña - Ahorrito Gaming';
+                    contentField.value = 'Hola {{customer_name}},\n\nHemos recibido una solicitud para restablecer tu contraseña.\n\nHaz clic en el siguiente enlace para crear una nueva contraseña:\n{{reset_link}}\n\nSi no solicitaste este cambio, puedes ignorar este correo y tu contraseña seguirá siendo la misma.\n\nSaludos,\nEl equipo de Ahorrito Gaming';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

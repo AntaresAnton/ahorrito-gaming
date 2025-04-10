@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .stats-card {
+            transition: transform 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .admin-table th, .admin-table td {
+            vertical-align: middle;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .status-online {
+            background-color: #28a745;
+        }
+        
+        .status-offline {
+            background-color: #dc3545;
+        }
+        
+        .status-maintenance {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link text-white">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link text-white">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link text-white">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link text-white">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <h2 class="mb-4">Dashboard</h2>
+                
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-dark border-primary stats-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-3">
+                                        <i class="fas fa-shopping-cart fa-3x text-primary"></i>
+                                    </div>
+                                    <div class="col-9 text-end">
+                                        <h3>256</h3>
+                                        <div class="text-muted">Ventas este mes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-arrow-up text-success me-1"></i>12%</span>
+                                    <a href="pedidos.html" class="text-primary">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-dark border-success stats-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-3">
+                                        <i class="fas fa-dollar-sign fa-3x text-success"></i>
+                                    </div>
+                                    <div class="col-9 text-end">
+                                        <h3>$8.5M</h3>
+                                        <div class="text-muted">Ingresos este mes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-success">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-arrow-up text-success me-1"></i>18%</span>
+                                    <a href="reportes.html" class="text-success">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-dark border-info stats-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-3">
+                                        <i class="fas fa-users fa-3x text-info"></i>
+                                    </div>
+                                    <div class="col-9 text-end">
+                                        <h3>124</h3>
+                                        <div class="text-muted">Nuevos usuarios</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-info">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-arrow-up text-success me-1"></i>5%</span>
+                                    <a href="clientes.html" class="text-info">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-dark border-warning stats-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-3">
+                                        <i class="fas fa-star fa-3x text-warning"></i>
+                                    </div>
+                                    <div class="col-9 text-end">
+                                        <h3>4.8</h3>
+                                        <div class="text-muted">Valoración promedio</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-warning">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-arrow-up text-success me-1"></i>0.2</span>
+                                    <a href="resenas.html" class="text-warning">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <div class="col-xl-8 mb-4">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Ventas de los últimos 6 meses</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="salesChartDropdown" data-bs-toggle="dropdown">
+                                        Filtrar
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="salesChartDropdown">
+                                        <li><a class="dropdown-item" href="#">Últimos 6 meses</a></li>
+                                        <li><a class="dropdown-item" href="#">Último año</a></li>
+                                        <li><a class="dropdown-item" href="#">Todo el tiempo</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 mb-4">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Ventas por plataforma</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="platformChartDropdown" data-bs-toggle="dropdown">
+                                        Filtrar
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="platformChartDropdown">
+                                        <li><a class="dropdown-item" href="#">Este mes</a></li>
+                                        <li><a class="dropdown-item" href="#">Últimos 3 meses</a></li>
+                                        <li><a class="dropdown-item" href="#">Últimos 6 meses</a></li>
+                                        <li><a class="dropdown-item" href="#">Último año</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="platformChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Orders and Top Products -->
+                <div class="row">
+                    <div class="col-xl-8 mb-4">
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Pedidos recientes</h5>
+                                <a href="pedidos.html" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover admin-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Cliente</th>
+                                                <th>Productos</th>
+                                                <th>Total</th>
+                                                <th>Fecha</th>
+                                                <th>Estado</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#AG-2024-1235</td>
+                                                <td>María González</td>
+                                                <td>2 productos</td>
+                                                <td>$74.980</td>
+                                                <td>20/06/2024</td>
+                                                <td><span class="badge bg-warning">Pendiente</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#AG-2024-1234</td>
+                                                <td>Carlos Rodríguez</td>
+                                                <td>2 productos</td>
+                                                <td>$38.780</td>
+                                                <td>15/06/2024</td>
+                                                <td><span class="badge bg-success">Completado</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-outline-success" disabled><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-outline-danger" disabled><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#AG-2024-1233</td>
+                                                <td>Laura Martínez</td>
+                                                <td>1 producto</td>
+                                                <td>$49.990</td>
+                                                <td>10/06/2024</td>
+                                                <td><span class="badge bg-success">Completado</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-outline-success" disabled><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-outline-danger" disabled><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#AG-2024-1232</td>
+                                                <td>Miguel Soto</td>
+                                                <td>3 productos</td>
+                                                <td>$89.970</td>
+                                                <td>05/06/2024</td>
+                                                <td><span class="badge bg-danger">Cancelado</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-outline-success" disabled><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-outline-danger" disabled><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#AG-2024-1231</td>
+                                                <td>Ana Gómez</td>
+                                                <td>1 producto</td>
+                                                <td>$24.990</td>
+                                                <td>01/06/2024</td>
+                                                <td><span class="badge bg-success">Completado</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn btn-outline-success" disabled><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-outline-danger" disabled><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 mb-4">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Productos más vendidos</h5>
+                                <a href="productos.html" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Cyberpunk 2077</span>
+                                        <span>156 ventas</span>
+                                    </div>
+                                    <div class="progress bg-secondary">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Elden Ring</span>
+                                        <span>142 ventas</span>
+                                    </div>
+                                    <div class="progress bg-secondary">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>EA Sports FC 24</span>
+                                        <span>128 ventas</span>
+                                    </div>
+                                    <div class="progress bg-secondary">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Hogwarts Legacy</span>
+                                        <span>98 ventas</span>
+                                    </div>
+                                    <div class="progress bg-secondary">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Red Dead Redemption 2</span>
+                                        <span>87 ventas</span>
+                                    </div>
+                                    <div class="progress bg-secondary">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gestión de Administradores -->
+<div class="card bg-dark border-secondary mb-4">
+    <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Gestión de Administradores</h5>
+        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+            <i class="fas fa-user-plus me-2"></i>Añadir Administrador
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Último acceso</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Marco Hernández</td>
+                        <td>marco@ahorritogaming.cl</td>
+                        <td>Super Admin</td>
+                        <td>Hoy, 14:32</td>
+                        <td><span class="badge bg-success">Activo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#editAdminModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" disabled>
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Elizabeth Alegría</td>
+                        <td>elizabeth@ahorritogaming.cl</td>
+                        <td>Admin</td>
+                        <td>Ayer, 18:45</td>
+                        <td><span class="badge bg-success">Activo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#editAdminModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Daniel San Martín</td>
+                        <td>daniel@ahorritogaming.cl</td>
+                        <td>Admin</td>
+                        <td>Hoy, 10:15</td>
+                        <td><span class="badge bg-success">Activo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#editAdminModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Ana Gómez</td>
+                        <td>ana@ahorritogaming.cl</td>
+                        <td>Editor</td>
+                        <td>15/06/2024</td>
+                        <td><span class="badge bg-warning text-dark">Suspendido</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#editAdminModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Añadir Administrador -->
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title" id="addAdminModalLabel">Añadir Nuevo Administrador</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="adminFirstName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="adminFirstName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="adminLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="adminLastName" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control bg-dark text-light border-secondary" id="adminEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminRole" class="form-label">Rol</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="adminRole" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="super_admin">Super Admin</option>
+                            <option value="admin">Admin</option>
+                            <option value="editor">Editor</option>
+                            <option value="support">Soporte</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminPassword" class="form-label">Contraseña temporal</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control bg-dark text-light border-secondary" id="adminPassword" required>
+                            <button class="btn btn-outline-secondary border-secondary" type="button">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminPermissions" class="form-label">Permisos</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="permProducts" checked>
+                            <label class="form-check-label" for="permProducts">Gestión de productos</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="permOrders" checked>
+                            <label class="form-check-label" for="permOrders">Gestión de pedidos</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="permUsers">
+                            <label class="form-check-label" for="permUsers">Gestión de usuarios</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="permReports">
+                            <label class="form-check-label" for="permReports">Acceso a informes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permSettings">
+                            <label class="form-check-label" for="permSettings">Configuración del sistema</label>
+                        </div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="sendCredentials" checked>
+                        <label class="form-check-label" for="sendCredentials">
+                            Enviar credenciales por email
+                        </label>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Se registrará esta acción en el historial de auditoría.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Crear Administrador</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Administrador -->
+<div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="editAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title" id="editAdminModalLabel">Editar Administrador</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="editAdminFirstName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="editAdminFirstName" value="Elizabeth" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editAdminLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="editAdminLastName" value="Alegría" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAdminEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control bg-dark text-light border-secondary" id="editAdminEmail" value="elizabeth@ahorritogaming.cl" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAdminRole" class="form-label">Rol</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="editAdminRole" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="super_admin">Super Admin</option>
+                            <option value="admin" selected>Admin</option>
+                            <option value="editor">Editor</option>
+                            <option value="support">Soporte</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAdminStatus" class="form-label">Estado</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="editAdminStatus" required>
+                            <option value="active" selected>Activo</option>
+                            <option value="suspended">Suspendido</option>
+                            <option value="inactive">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAdminPermissions" class="form-label">Permisos</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="editPermProducts" checked>
+                            <label class="form-check-label" for="editPermProducts">Gestión de productos</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="editPermOrders" checked>
+                            <label class="form-check-label" for="editPermOrders">Gestión de pedidos</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="editPermUsers" checked>
+                            <label class="form-check-label" for="editPermUsers">Gestión de usuarios</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="editPermReports" checked>
+                            <label class="form-check-label" for="editPermReports">Acceso a informes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="editPermSettings">
+                            <label class="form-check-label" for="editPermSettings">Configuración del sistema</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="resetPassword">
+                            <label class="form-check-label" for="resetPassword">Restablecer contraseña</label>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Se registrará esta modificación en el historial de auditoría.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Historial de Auditoría -->
+<div class="card bg-dark border-secondary">
+    <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Historial de Auditoría</h5>
+        <div>
+            <button class="btn btn-sm btn-outline-light me-2">
+                <i class="fas fa-download me-2"></i>Exportar
+            </button>
+            <button class="btn btn-sm btn-outline-light">
+                <i class="fas fa-filter me-2"></i>Filtrar
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha/Hora</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Módulo</th>
+                        <th>Detalles</th>
+                        <th>IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1254</td>
+                        <td>20/06/2024 15:42:30</td>
+                        <td>Marco Hernández</td>
+                        <td><span class="badge bg-info">Creación</span></td>
+                        <td>Administradores</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.105</td>
+                    </tr>
+                    <tr>
+                        <td>1253</td>
+                        <td>20/06/2024 14:38:15</td>
+                        <td>Elizabeth Alegría</td>
+                        <td><span class="badge bg-warning text-dark">Modificación</span></td>
+                        <td>Productos</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.120</td>
+                    </tr>
+                    <tr>
+                        <td>1252</td>
+                        <td>20/06/2024 13:15:22</td>
+                        <td>Daniel San Martín</td>
+                        <td><span class="badge bg-success">Aprobación</span></td>
+                        <td>Pedidos</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.115</td>
+                    </tr>
+                    <tr>
+                        <td>1251</td>
+                        <td>20/06/2024 12:05:47</td>
+                        <td>Ana Gómez</td>
+                        <td><span class="badge bg-danger">Eliminación</span></td>
+                        <td>Productos</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.130</td>
+                    </tr>
+                    <tr>
+                        <td>1250</td>
+                        <td>20/06/2024 11:30:18</td>
+                        <td>Marco Hernández</td>
+                        <td><span class="badge bg-primary">Acceso</span></td>
+                        <td>Sistema</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.105</td>
+                    </tr>
+                    <tr>
+                        <td>1249</td>
+                        <td>20/06/2024 10:45:33</td>
+                        <td>Elizabeth Alegría</td>
+                        <td><span class="badge bg-warning text-dark">Modificación</span></td>
+                        <td>Configuración</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.120</td>
+                    </tr>
+                    <tr>
+                        <td>1248</td>
+                        <td>20/06/2024 09:22:05</td>
+                        <td>Daniel San Martín</td>
+                        <td><span class="badge bg-info">Creación</span></td>
+                        <td>Productos</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.115</td>
+                    </tr>
+                    <tr>
+                        <td>1247</td>
+                        <td>19/06/2024 18:15:40</td>
+                        <td>Ana Gómez</td>
+                        <td><span class="badge bg-secondary">Intento fallido</span></td>
+                        <td>Autenticación</td>
+                        <td>
+                            <button class="btn btn-sm btn-link p-0" data-bs-toggle="modal" data-bs-target="#auditDetailsModal">
+                                Ver detalles
+                            </button>
+                        </td>
+                        <td>192.168.1.130</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Paginación -->
+        <nav aria-label="Paginación de historial de auditoría">
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Modal Detalles de Auditoría -->
+<div class="modal fade" id="auditDetailsModal" tabindex="-1" aria-labelledby="auditDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title" id="auditDetailsModalLabel">Detalles de Auditoría</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6>Información General</h6>
+                        <table class="table table-sm table-dark">
+                            <tr>
+                                <th>ID de Evento:</th>
+                                <td>1254</td>
+                            </tr>
+                            <tr>
+                                <th>Fecha y Hora:</th>
+                                <td>20/06/2024 15:42:30</td>
+                            </tr>
+                            <tr>
+                                <th>Usuario:</th>
+                                <td>Marco Hernández (ID: 1)</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección IP:</th>
+                                <td>192.168.1.105</td>
+                            </tr>
+                            <tr>
+                                <th>Navegador/SO:</th>
+                                <td>Chrome 115.0.5790 / Windows 11</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Detalles de la Acción</h6>
+                        <table class="table table-sm table-dark">
+                            <tr>
+                                <th>Tipo de Acción:</th>
+                                <td><span class="badge bg-info">Creación</span></td>
+                            </tr>
+                            <tr>
+                                <th>Módulo:</th>
+                                <td>Administradores</td>
+                            </tr>
+                            <tr>
+                                <th>Entidad Afectada:</th>
+                                <td>Usuario Administrador (ID: 5)</td>
+                            </tr>
+                            <tr>
+                                <th>Estado:</th>
+                                <td><span class="badge bg-success">Exitoso</span></td>
+                            </tr>
+                            <tr>
+                                <th>Referencia:</th>
+                                <td>admin_create_5</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <h6>Datos Modificados</h6>
+                <div class="bg-darker p-3 rounded mb-3" style="background-color: #121212;">
+                    <pre class="text-light mb-0" style="white-space: pre-wrap;">
+{
+  "action": "create",
+  "entity": "admin_user",
+  "entity_id": 5,
+  "data": {
+    "name": "Carlos",
+    "last_name": "Rodríguez",
+    "email": "carlos@ahorritogaming.cl",
+    "role": "editor",
+    "permissions": ["products", "orders", "reports"],
+    "status": "active",
+    "created_by": 1
+  }
+}
+                    </pre>
+                </div>
+                
+                <div class="alert alert-secondary">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Este registro de auditoría no puede ser modificado y se conservará por un período de 5 años según la política de retención de datos.
+                </div>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-light">
+                    <i class="fas fa-download me-2"></i>Exportar Registro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Configuración de Auditoría -->
+<div class="card bg-dark border-secondary mt-4">
+    <div class="card-header bg-dark border-secondary">
+        <h5 class="mb-0">Configuración de Auditoría</h5>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="mb-3">Eventos a Registrar</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditLogin" checked>
+                        <label class="form-check-label" for="auditLogin">
+                            Inicios de sesión (exitosos y fallidos)
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditProducts" checked>
+                        <label class="form-check-label" for="auditProducts">
+                            Cambios en productos
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditOrders" checked>
+                        <label class="form-check-label" for="auditOrders">
+                            Gestión de pedidos
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditUsers" checked>
+                        <label class="form-check-label" for="auditUsers">
+                            Gestión de usuarios
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditAdmins" checked>
+                        <label class="form-check-label" for="auditAdmins">
+                            Gestión de administradores
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditConfig" checked>
+                        <label class="form-check-label" for="auditConfig">
+                            Cambios en configuración
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="auditReports">
+                        <label class="form-check-label" for="auditReports">
+                            Generación de informes
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="mb-3">Políticas de Retención</h6>
+                    <div class="mb-3">
+                        <label for="retentionPeriod" class="form-label">Período de retención de registros</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="retentionPeriod">
+                            <option value="1">1 año</option>
+                            <option value="2">2 años</option>
+                            <option value="3">3 años</option>
+                            <option value="5" selected>5 años</option>
+                            <option value="7">7 años</option>
+                            <option value="10">10 años</option>
+                            <option value="0">Indefinido</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="backupFrequency" class="form-label">Frecuencia de respaldo de registros</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="backupFrequency">
+                            <option value="daily">Diario</option>
+                            <option value="weekly" selected>Semanal</option>
+                            <option value="monthly">Mensual</option>
+                            <option value="quarterly">Trimestral</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exportFormat" class="form-label">Formato de exportación predeterminado</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="exportFormat">
+                            <option value="csv" selected>CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="pdf">PDF</option>
+                            <option value="xlsx">Excel (XLSX)</option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="encryptExports" checked>
+                        <label class="form-check-label" for="encryptExports">
+                            Cifrar archivos exportados
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h6 class="mb-3">Notificaciones</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="notifyFailedLogins" checked>
+                        <label class="form-check-label" for="notifyFailedLogins">
+                            Notificar intentos fallidos de inicio de sesión
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="notifyAdminChanges" checked>
+                        <label class="form-check-label" for="notifyAdminChanges">
+                            Notificar cambios en permisos de administradores
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="notifyConfigChanges" checked>
+                        <label class="form-check-label" for="notifyConfigChanges">
+                            Notificar cambios en configuración del sistema
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notificationEmails" class="form-label">Correos para notificaciones de seguridad</label>
+                        <input type="text" class="form-control bg-dark text-light border-secondary" id="notificationEmails" value="seguridad@ahorritogaming.cl, marco@ahorritogaming.cl">
+                        <small class="text-muted">Separar múltiples correos con comas</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="mb-3">Seguridad Adicional</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="logIpAddresses" checked>
+                        <label class="form-check-label" for="logIpAddresses">
+                            Registrar direcciones IP
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="logUserAgents" checked>
+                        <label class="form-check-label" for="logUserAgents">
+                            Registrar información del navegador/dispositivo
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="tamperProtection" checked>
+                        <label class="form-check-label" for="tamperProtection">
+                            Protección contra manipulación de registros
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="enableSignatures" checked>
+                        <label class="form-check-label" for="enableSignatures">
+                            Firmar digitalmente los registros de auditoría
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning mt-4">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Cambiar estas configuraciones podría afectar el cumplimiento de normativas. Consulte con el departamento legal antes de realizar modificaciones.
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+                <button type="button" class="btn btn-secondary me-2">Restaurar valores predeterminados</button>
+                <button type="submit" class="btn btn-primary">Guardar configuración</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+                <!-- System Status -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="mb-0">Estado del sistema</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover admin-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Servicio</th>
+                                                <th>Estado</th>
+                                                <th>Uptime</th>
+                                                <th>Última actualización</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sitio web</td>
+                                                <td><span class="status-indicator status-online"></span> Online</td>
+                                                <td>99.98%</td>
+                                                <td>20/06/2024 08:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>API de pagos</td>
+                                                <td><span class="status-indicator status-online"></span> Online</td>
+                                                <td>99.95%</td>
+                                                <td>20/06/2024 08:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sistema de claves</td>
+                                                <td><span class="status-indicator status-online"></span> Online</td>
+                                                <td>99.99%</td>
+                                                <td>20/06/2024 08:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Base de datos</td>
+                                                <td><span class="status-indicator status-online"></span> Online</td>
+                                                <td>99.97%</td>
+                                                <td>20/06/2024 08:00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sales Chart
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(salesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [5.2, 6.3, 8.5, 7.8, 8.2, 8.5],
+                        backgroundColor: 'rgba(123, 76, 255, 0.2)',
+                        borderColor: 'rgba(123, 76, 255, 1)',
+                        borderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#aaa'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#aaa'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Platform Chart
+            const platformCtx = document.getElementById('platformChart').getContext('2d');
+            const platformChart = new Chart(platformCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['PC', 'PlayStation', 'Xbox', 'Nintendo'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            'rgba(123, 76, 255, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(255, 99, 132, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(123, 76, 255, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff',
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

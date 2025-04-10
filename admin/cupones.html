@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Cupones - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .form-control, .form-select {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #fff;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            border-color: #7b4cff;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+        
+        .modal-content {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+        
+        .modal-header, .modal-footer {
+            border-color: #333;
+        }
+        
+        .coupon-card {
+            border: 2px dashed #7b4cff;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coupon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: #121212;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .coupon-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: #121212;
+            border-radius: 50%;
+            transform: translateY(50%);
+        }
+        
+        .coupon-status-active {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-color: #28a745;
+        }
+        
+        .coupon-status-expired {
+            background-color: rgba(108, 117, 125, 0.2);
+            border-color: #6c757d;
+        }
+        
+        .coupon-status-scheduled {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link text-white">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link text-white">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link text-white">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Administración de Cupones</h2>
+                    <div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCouponModal">
+                            <i class="fas fa-plus me-2"></i>Crear Cupón
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filters -->
+                <div class="card bg-dark border-secondary mb-4">
+                    <div class="card-header bg-dark border-secondary">
+                        <h5 class="card-title mb-0">Filtros</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterCode" class="form-label">Código</label>
+                                <input type="text" class="form-control" id="filterCode" placeholder="Buscar código...">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterType" class="form-label">Tipo</label>
+                                <select class="form-select" id="filterType">
+                                    <option value="">Todos</option>
+                                    <option value="percentage">Porcentaje</option>
+                                    <option value="fixed">Monto fijo</option>
+                                    <option value="free_shipping">Envío gratis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterStatus" class="form-label">Estado</label>
+                                <select class="form-select" id="filterStatus">
+                                    <option value="">Todos</option>
+                                    <option value="active">Activos</option>
+                                    <option value="scheduled">Programados</option>
+                                    <option value="expired">Expirados</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterDate" class="form-label">Fecha</label>
+                                <select class="form-select" id="filterDate">
+                                    <option value="">Todas</option>
+                                    <option value="today">Hoy</option>
+                                    <option value="week">Esta semana</option>
+                                    <option value="month">Este mes</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button class="btn btn-primary me-2" id="applyFilters">
+                                    <i class="fas fa-filter me-2"></i>Aplicar Filtros
+                                </button>
+                                <button class="btn btn-outline-secondary" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i>Resetear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coupons Grid -->
+                <div class="row g-4 mb-4">
+                    <!-- Active Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-active">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">WINTER25</h5>
+                                <span class="badge bg-success">Activo</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Porcentaje</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-success">25%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>01/06/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>30/06/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$30.000</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>45 / 100</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Todos los productos</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Desactivar">
+                                        <i class="fas fa-ban me-1"></i>Desactivar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scheduled Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-scheduled">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">SUMMER30</h5>
+                                <span class="badge bg-warning text-dark">Programado</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Porcentaje</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-warning">30%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>01/07/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>31/07/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$25.000</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>0 / 200</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Categoría PC</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fixed Amount Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-active">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">SAVE10K</h5>
+                                <span class="badge bg-success">Activo</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Monto fijo</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-success">$10.000</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>15/05/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>15/07/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$50.000</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>12 / 50</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Categorías PlayStation, Xbox</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Desactivar">
+                                        <i class="fas fa-ban me-1"></i>Desactivar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Free Shipping Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-active">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">FREESHIP</h5>
+                                <span class="badge bg-success">Activo</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Envío gratis</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-success">Envío</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>01/06/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>30/06/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$35.000</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>28 / 100</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Todos los productos</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Desactivar">
+                                        <i class="fas fa-ban me-1"></i>Desactivar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- First Purchase Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-active">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">WELCOME15</h5>
+                                <span class="badge bg-success">Activo</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Porcentaje</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-success">15%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>01/01/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>31/12/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$0</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>87 / ∞</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Primera compra</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Desactivar">
+                                        <i class="fas fa-ban me-1"></i>Desactivar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Expired Coupon -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card bg-dark border-secondary h-100 coupon-card coupon-status-expired">
+                            <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">SPRING20</h5>
+                                <span class="badge bg-secondary">Expirado</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Tipo:</span>
+                                        <span>Porcentaje</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Valor:</span>
+                                        <span class="fs-4 fw-bold text-muted">20%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Fecha inicio:</span>
+                                        <span>01/03/2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Fecha fin:</span>
+                                        <span>31/05/2024</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <span class="d-block text-muted">Mínimo compra:</span>
+                                        <span>$20.000</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block text-muted">Usos:</span>
+                                        <span>143 / 150</span>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">Aplicable a: Todos los productos</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-dark border-secondary">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCouponModal">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Duplicar">
+                                        <i class="fas fa-copy me-1"></i>Duplicar
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Coupon Modal -->
+    <div class="modal fade" id="viewCouponModal" tabindex="-1" aria-labelledby="viewCouponModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewCouponModalLabel">Detalles del Cupón</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card bg-dark border-secondary mb-3">
+                                <div class="card-header bg-dark border-secondary">
+                                    <h5 class="card-title mb-0">Información General</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Código:</label>
+                                        <p class="fs-4 fw-bold">WINTER25</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Descripción:</label>
+                                        <p>Descuento de invierno del 25% en todos los productos.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Estado:</label>
+                                        <p><span class="badge bg-success">Activo</span></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Creado por:</label>
+                                        <p>Admin (15/05/2024)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-dark border-secondary">
+                                <div class="card-header bg-dark border-secondary">
+                                    <h5 class="card-title mb-0">Detalles del Descuento</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Tipo:</label>
+                                        <p>Porcentaje</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Valor:</label>
+                                        <p class="fs-4 fw-bold text-success">25%</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Mínimo de compra:</label>
+                                        <p>$30.000</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Máximo descuento:</label>
+                                        <p>Sin límite</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card bg-dark border-secondary mb-3 mb-md-0">
+                                <div class="card-header bg-dark border-secondary">
+                                    <h5 class="card-title mb-0">Restricciones</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Fecha de inicio:</label>
+                                        <p>01/06/2024</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Fecha de fin:</label>
+                                        <p>30/06/2024</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Límite de usos:</label>
+                                        <p>100 (45 usados)</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Usos por cliente:</label>
+                                        <p>1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-dark border-secondary">
+                                <div class="card-header bg-dark border-secondary">
+                                    <h5 class="card-title mb-0">Aplicabilidad</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Productos:</label>
+                                        <p>Todos los productos</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Categorías:</label>
+                                        <p>Todas las categorías</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Clientes:</label>
+                                        <p>Todos los clientes</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Combinable con otros cupones:</label>
+                                        <p>No</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group me-auto">
+                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" class="btn btn-danger">Desactivar</button>
+                        <button type="button" class="btn btn-info">Duplicar</button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Coupon Modal -->
+    <div class="modal fade" id="addCouponModal" tabindex="-1" aria-labelledby="addCouponModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCouponModalLabel">Crear Nuevo Cupón</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="couponCode" class="form-label">Código del Cupón*</label>
+                                <input type="text" class="form-control" id="couponCode" placeholder="Ej: SUMMER25" required>
+                                <small class="text-muted">El código debe ser único y sin espacios.</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="couponStatus" class="form-label">Estado</label>
+                                <select class="form-select" id="couponStatus">
+                                    <option value="active">Activo</option>
+                                    <option value="inactive">Inactivo</option>
+                                    <option value="scheduled">Programado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="couponDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="couponDescription" rows="2" placeholder="Descripción breve del cupón"></textarea>
+                        </div>
+                        
+                        <h6 class="border-bottom border-secondary pb-2 mb-3">Detalles del Descuento</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="couponType" class="form-label">Tipo de Descuento*</label>
+                                <select class="form-select" id="couponType" required>
+                                    <option value="percentage">Porcentaje</option>
+                                    <option value="fixed">Monto Fijo</option>
+                                    <option value="free_shipping">Envío Gratis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="couponValue" class="form-label">Valor*</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="couponValue" min="0" required>
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="couponMinPurchase" class="form-label">Compra Mínima</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="couponMinPurchase" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="couponMaxDiscount" class="form-label">Descuento Máximo</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" id="couponMaxDiscount" min="0" placeholder="Sin límite">
+                            </div>
+                            <small class="text-muted">Dejar en blanco para no establecer un límite.</small>
+                        </div>
+                        
+                        <h6 class="border-bottom border-secondary pb-2 mb-3">Restricciones</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="couponStartDate" class="form-label">Fecha de Inicio*</label>
+                                <input type="date" class="form-control" id="couponStartDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="couponEndDate" class="form-label">Fecha de Fin*</label>
+                                <input type="date" class="form-control" id="couponEndDate" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="couponUsageLimit" class="form-label">Límite de Usos</label>
+                                <input type="number" class="form-control" id="couponUsageLimit" min="0" placeholder="Sin límite">
+                                <small class="text-muted">Dejar en blanco para usos ilimitados.</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="couponUsagePerCustomer" class="form-label">Usos por Cliente</label>
+                                <input type="number" class="form-control" id="couponUsagePerCustomer" min="1" value="1">
+                            </div>
+                        </div>
+                        
+                        <h6 class="border-bottom border-secondary pb-2 mb-3">Aplicabilidad</h6>
+                        <div class="mb-3">
+                            <label class="form-label">Aplicable a Productos</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="productApplicability" id="allProducts" value="all" checked>
+                                <label class="form-check-label" for="allProducts">
+                                    Todos los productos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="productApplicability" id="specificProducts" value="specific">
+                                <label class="form-check-label" for="specificProducts">
+                                    Productos específicos
+                                </label>
+                            </div>
+                            <div class="mt-2 d-none" id="specificProductsContainer">
+                                <select class="form-select" multiple size="3">
+                                    <option value="1">Cyberpunk 2077</option>
+                                    <option value="2">Elden Ring</option>
+                                    <option value="3">Call of Duty: Modern Warfare III</option>
+                                    <option value="4">EA Sports FC 24</option>
+                                    <option value="5">Hogwarts Legacy</option>
+                                </select>
+                                <small class="text-muted">Mantén presionado Ctrl para seleccionar múltiples productos.</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Aplicable a Categorías</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryApplicability" id="allCategories" value="all" checked>
+                                <label class="form-check-label" for="allCategories">
+                                    Todas las categorías
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryApplicability" id="specificCategories" value="specific">
+                                <label class="form-check-label" for="specificCategories">
+                                    Categorías específicas
+                                </label>
+                            </div>
+                            <div class="mt-2 d-none" id="specificCategoriesContainer">
+                                <select class="form-select" multiple size="3">
+                                    <option value="1">PC</option>
+                                    <option value="2">PlayStation</option>
+                                    <option value="3">Xbox</option>
+                                    <option value="4">Nintendo</option>
+                                    <option value="5">DLCs</option>
+                                </select>
+                                <small class="text-muted">Mantén presionado Ctrl para seleccionar múltiples categorías.</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Aplicable a Clientes</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="customerApplicability" id="allCustomers" value="all" checked>
+                                <label class="form-check-label" for="allCustomers">
+                                    Todos los clientes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="customerApplicability" id="specificCustomers" value="specific">
+                                <label class="form-check-label" for="specificCustomers">
+                                    Clientes específicos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="customerApplicability" id="newCustomers" value="new">
+                                <label class="form-check-label" for="newCustomers">
+                                    Solo nuevos clientes (primera compra)
+                                </label>
+                            </div>
+                            <div class="mt-2 d-none" id="specificCustomersContainer">
+                                <select class="form-select" multiple size="3">
+                                    <option value="1">Carlos Rodríguez</option>
+                                    <option value="2">Laura Martínez</option>
+                                    <option value="3">Miguel Ángel Pérez</option>
+                                    <option value="4">Ana Gómez</option>
+                                    <option value="5">Javier López</option>
+                                </select>
+                                <small class="text-muted">Mantén presionado Ctrl para seleccionar múltiples clientes.</small>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="couponCombination">
+                            <label class="form-check-label" for="couponCombination">Permitir combinación con otros cupones</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cupón</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle specific products container visibility
+            document.querySelectorAll('input[name="productApplicability"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    const specificProductsContainer = document.getElementById('specificProductsContainer');
+                    if (this.value === 'specific') {
+                        specificProductsContainer.classList.remove('d-none');
+                    } else {
+                        specificProductsContainer.classList.add('d-none');
+                    }
+                });
+            });
+            
+            // Toggle specific categories container visibility
+            document.querySelectorAll('input[name="categoryApplicability"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    const specificCategoriesContainer = document.getElementById('specificCategoriesContainer');
+                    if (this.value === 'specific') {
+                        specificCategoriesContainer.classList.remove('d-none');
+                    } else {
+                        specificCategoriesContainer.classList.add('d-none');
+                    }
+                });
+            });
+            
+            // Toggle specific customers container visibility
+            document.querySelectorAll('input[name="customerApplicability"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    const specificCustomersContainer = document.getElementById('specificCustomersContainer');
+                    if (this.value === 'specific') {
+                        specificCustomersContainer.classList.remove('d-none');
+                    } else {
+                        specificCustomersContainer.classList.add('d-none');
+                    }
+                });
+            });
+            
+            // Change input group text based on coupon type
+            document.getElementById('couponType').addEventListener('change', function() {
+                const valueInputGroup = document.getElementById('couponValue').nextElementSibling;
+                if (this.value === 'percentage') {
+                    valueInputGroup.textContent = '%';
+                } else if (this.value === 'fixed') {
+                    valueInputGroup.textContent = '$';
+                } else if (this.value === 'free_shipping') {
+                    valueInputGroup.textContent = '';
+                    document.getElementById('couponValue').value = '0';
+                }
+            });
+            
+            // Reset filters button
+            document.getElementById('resetFilters').addEventListener('click', function() {
+                document.getElementById('filterCode').value = '';
+                document.getElementById('filterType').value = '';
+                document.getElementById('filterStatus').value = '';
+                document.getElementById('filterDate').value = '';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+        }
+        
+        .form-control, .form-select {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #fff;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            border-color: #7b4cff;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+        
+        .report-card {
+            transition: transform 0.3s;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="configuracion.html"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link text-white">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link text-white">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link text-white">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link text-white">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <h2 class="mb-4">Reportes</h2>
+                
+                <!-- Date Range Filter -->
+                <div class="card bg-dark border-secondary mb-4">
+                    <div class="card-body">
+                        <form class="row g-3 align-items-end">
+                            <div class="col-md-4">
+                                <label for="dateRangePreset" class="form-label">Rango de fechas</label>
+                                <select class="form-select" id="dateRangePreset">
+                                    <option value="today">Hoy</option>
+                                    <option value="yesterday">Ayer</option>
+                                    <option value="last7days" selected>Últimos 7 días</option>
+                                    <option value="last30days">Últimos 30 días</option>
+                                    <option value="thisMonth">Este mes</option>
+                                    <option value="lastMonth">Mes pasado</option>
+                                    <option value="thisYear">Este año</option>
+                                    <option value="custom">Personalizado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="startDate" class="form-label">Fecha inicio</label>
+                                <input type="date" class="form-control" id="startDate" value="2024-06-01">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="endDate" class="form-label">Fecha fin</label>
+                                <input type="date" class="form-control" id="endDate" value="2024-06-07">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Aplicar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Report Types -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="card bg-dark border-secondary report-card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Ventas</h5>
+                                <p class="card-text">Análisis de ventas por período, producto y categoría.</p>
+                                <a href="#salesReports" class="btn btn-outline-primary" data-bs-toggle="collapse" role="button" aria-expanded="true">Ver reportes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-dark border-secondary report-card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Clientes</h5>
+                                <p class="card-text">Análisis de clientes, adquisición y retención.</p>
+                                <a href="#customerReports" class="btn btn-outline-primary" data-bs-toggle="collapse" role="button" aria-expanded="false">Ver reportes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-dark border-secondary report-card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-gamepad fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Productos</h5>
+                                <p class="card-text">Análisis de rendimiento de productos y categorías.</p>
+                                <a href="#productReports" class="btn btn-outline-primary" data-bs-toggle="collapse" role="button" aria-expanded="false">Ver reportes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-dark border-secondary report-card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bullseye fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Marketing</h5>
+                                <p class="card-text">Análisis de campañas, cupones y conversiones.</p>
+                                <a href="#marketingReports" class="btn btn-outline-primary" data-bs-toggle="collapse" role="button" aria-expanded="false">Ver reportes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sales Reports -->
+                <div class="collapse show" id="salesReports">
+                    <div class="card bg-dark border-secondary mb-4">
+                        <div class="card-header bg-dark border-secondary">
+                            <h5 class="card-title mb-0">Reportes de Ventas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Ventas Totales</h6>
+                                            <h3 class="mb-0">$12,458,790</h3>
+                                            <span class="badge bg-success">+15.2% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Pedidos</h6>
+                                            <h3 class="mb-0">1,245</h3>
+                                            <span class="badge bg-success">+8.7% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Valor Promedio</h6>
+                                            <h3 class="mb-0">$10,007</h3>
+                                            <span class="badge bg-success">+5.9% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Tasa de Conversión</h6>
+                                            <h3 class="mb-0">3.8%</h3>
+                                            <span class="badge bg-danger">-0.5% <i class="fas fa-arrow-down"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-8">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">Ventas por Período</h6>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-outline-secondary active">Diario</button>
+                                                <button type="button" class="btn btn-outline-secondary">Semanal</button>
+                                                <button type="button" class="btn btn-outline-secondary">Mensual</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="salesChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Ventas por Plataforma</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="platformChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="border-bottom border-secondary pb-2 mb-3">Ventas por Producto</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Categoría</th>
+                                                <th>Plataforma</th>
+                                                <th>Unidades</th>
+                                                <th>Ventas</th>
+                                                <th>% del Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cyberpunk 2077</td>
+                                                <td>RPG</td>
+                                                <td>PC</td>
+                                                <td>245</td>
+                                                <td>$3,378,550</td>
+                                                <td>27.1%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elden Ring</td>
+                                                <td>RPG</td>
+                                                <td>PC</td>
+                                                <td>187</td>
+                                                <td>$2,617,430</td>
+                                                <td>21.0%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>EA Sports FC 24</td>
+                                                <td>Deportes</td>
+                                                <td>PS5</td>
+                                                <td>156</td>
+                                                <td>$1,559,844</td>
+                                                <td>12.5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Call of Duty: Modern Warfare III</td>
+                                                <td>Acción</td>
+                                                <td>PC</td>
+                                                <td>132</td>
+                                                <td>$1,319,868</td>
+                                                <td>10.6%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hogwarts Legacy</td>
+                                                <td>Aventura</td>
+                                                <td>PC</td>
+                                                <td>98</td>
+                                                <td>$979,902</td>
+                                                <td>7.9%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-outline-primary">Ver reporte completo</button>
+                                    <div class="btn-group ms-2">
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-csv"></i> CSV</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-excel"></i> Excel</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-pdf"></i> PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer Reports -->
+                <div class="collapse" id="customerReports">
+                    <div class="card bg-dark border-secondary mb-4">
+                        <div class="card-header bg-dark border-secondary">
+                            <h5 class="card-title mb-0">Reportes de Clientes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Clientes Totales</h6>
+                                            <h3 class="mb-0">8,742</h3>
+                                            <span class="badge bg-success">+12.3% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Nuevos Clientes</h6>
+                                            <h3 class="mb-0">342</h3>
+                                            <span class="badge bg-success">+5.2% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Tasa de Retención</h6>
+                                            <h3 class="mb-0">68.5%</h3>
+                                            <span class="badge bg-success">+2.1% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Valor de Vida del Cliente</h6>
+                                            <h3 class="mb-0">$45,320</h3>
+                                            <span class="badge bg-success">+8.7% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Adquisición de Clientes</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="customerAcquisitionChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Segmentación de Clientes</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="customerSegmentationChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="border-bottom border-secondary pb-2 mb-3">Mejores Clientes</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Cliente</th>
+                                                <th>Email</th>
+                                                <th>Pedidos</th>
+                                                <th>Total Gastado</th>
+                                                <th>Última Compra</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Carlos Rodríguez</td>
+                                                <td>carlos.rodriguez@email.com</td>
+                                                <td>24</td>
+                                                <td>$458,750</td>
+                                                <td>05/06/2024</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>María González</td>
+                                                <td>maria.gonzalez@email.com</td>
+                                                <td>18</td>
+                                                <td>$325,980</td>
+                                                <td>02/06/2024</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Juan Pérez</td>
+                                                <td>juan.perez@email.com</td>
+                                                <td>15</td>
+                                                <td>$287,450</td>
+                                                <td>28/05/2024</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ana Martínez</td>
+                                                <td>ana.martinez@email.com</td>
+                                                <td>12</td>
+                                                <td>$198,670</td>
+                                                <td>01/06/2024</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Diego López</td>
+                                                <td>diego.lopez@email.com</td>
+                                                <td>10</td>
+                                                <td>$175,340</td>
+                                                <td>25/05/2024</td>
+                                                <td><span class="badge bg-warning">Inactivo</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-outline-primary">Ver reporte completo</button>
+                                    <div class="btn-group ms-2">
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-csv"></i> CSV</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-excel"></i> Excel</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-pdf"></i> PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Reports -->
+                <div class="collapse" id="productReports">
+                    <div class="card bg-dark border-secondary mb-4">
+                        <div class="card-header bg-dark border-secondary">
+                            <h5 class="card-title mb-0">Reportes de Productos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Total Productos</h6>
+                                            <h3 class="mb-0">1,245</h3>
+                                            <span class="badge bg-success">+8.3% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Productos Vendidos</h6>
+                                            <h3 class="mb-0">3,782</h3>
+                                            <span class="badge bg-success">+12.5% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Productos Sin Stock</h6>
+                                            <h3 class="mb-0">24</h3>
+                                            <span class="badge bg-danger">+5.2% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Tasa de Conversión</h6>
+                                            <h3 class="mb-0">4.2%</h3>
+                                            <span class="badge bg-success">+0.8% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Ventas por Categoría</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="categorySalesChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Ventas por Plataforma</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="platformSalesChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="border-bottom border-secondary pb-2 mb-3">Productos Más Vendidos</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Categoría</th>
+                                                <th>Plataforma</th>
+                                                <th>Precio</th>
+                                                <th>Unidades Vendidas</th>
+                                                <th>Ingresos</th>
+                                                <th>Conversión</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cyberpunk 2077</td>
+                                                <td>RPG</td>
+                                                <td>PC</td>
+                                                <td>$13,790</td>
+                                                <td>245</td>
+                                                <td>$3,378,550</td>
+                                                <td>8.7%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elden Ring</td>
+                                                <td>RPG</td>
+                                                <td>PC</td>
+                                                <td>$24,990</td>
+                                                <td>187</td>
+                                                <td>$4,673,130</td>
+                                                <td>7.2%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>EA Sports FC 24</td>
+                                                <td>Deportes</td>
+                                                <td>PS5</td>
+                                                <td>$49,990</td>
+                                                <td>156</td>
+                                                <td>$7,798,440</td>
+                                                <td>6.5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Call of Duty: Modern Warfare III</td>
+                                                <td>Acción</td>
+                                                <td>PC</td>
+                                                <td>$54,990</td>
+                                                <td>132</td>
+                                                <td>$7,258,680</td>
+                                                <td>5.8%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hogwarts Legacy</td>
+                                                <td>Aventura</td>
+                                                <td>PC</td>
+                                                <td>$39,990</td>
+                                                <td>98</td>
+                                                <td>$3,919,020</td>
+                                                <td>4.2%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-outline-primary">Ver reporte completo</button>
+                                    <div class="btn-group ms-2">
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-csv"></i> CSV</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-excel"></i> Excel</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-pdf"></i> PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Marketing Reports -->
+                <div class="collapse" id="marketingReports">
+                    <div class="card bg-dark border-secondary mb-4">
+                        <div class="card-header bg-dark border-secondary">
+                            <h5 class="card-title mb-0">Reportes de Marketing</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Campañas Activas</h6>
+                                            <h3 class="mb-0">8</h3>
+                                            <span class="badge bg-success">+2 <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Cupones Usados</h6>
+                                            <h3 class="mb-0">342</h3>
+                                            <span class="badge bg-success">+18.5% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">Tasa de Conversión</h6>
+                                            <h3 class="mb-0">5.8%</h3>
+                                            <span class="badge bg-success">+1.2% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-muted">ROI Marketing</h6>
+                                            <h3 class="mb-0">387%</h3>
+                                            <span class="badge bg-success">+42% <i class="fas fa-arrow-up"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Rendimiento de Campañas</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="campaignPerformanceChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-dark border-secondary h-100">
+                                        <div class="card-header bg-dark border-secondary">
+                                            <h6 class="card-title mb-0">Fuentes de Tráfico</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="trafficSourcesChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="border-bottom border-secondary pb-2 mb-3">Rendimiento de Cupones</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Tipo</th>
+                                                <th>Descuento</th>
+                                                <th>Usos</th>
+                                                <th>Ventas Generadas</th>
+                                                <th>Conversión</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CYBERWEEK</td>
+                                                <td>Porcentaje</td>
+                                                <td>25%</td>
+                                                <td>187</td>
+                                                <td>$4,578,950</td>
+                                                <td>8.2%</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>WELCOME10</td>
+                                                <td>Porcentaje</td>
+                                                <td>10%</td>
+                                                <td>124</td>
+                                                <td>$1,245,780</td>
+                                                <td>6.7%</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>SUMMER2024</td>
+                                                <td>Monto Fijo</td>
+                                                <td>$5,000</td>
+                                                <td>98</td>
+                                                <td>$2,458,900</td>
+                                                <td>5.4%</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>FREESHIPING</td>
+                                                <td>Envío Gratis</td>
+                                                <td>-</td>
+                                                <td>76</td>
+                                                <td>$1,879,450</td>
+                                                <td>4.8%</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>EASTER2024</td>
+                                                <td>Porcentaje</td>
+                                                <td>15%</td>
+                                                <td>45</td>
+                                                <td>$987,650</td>
+                                                <td>3.2%</td>
+                                                <td><span class="badge bg-danger">Expirado</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-outline-primary">Ver reporte completo</button>
+                                    <div class="btn-group ms-2">
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-csv"></i> CSV</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-excel"></i> Excel</button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-file-pdf"></i> PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuración global de Chart.js para tema oscuro
+            Chart.defaults.color = '#fff';
+            Chart.defaults.borderColor = '#333';
+            
+            // Gráfico de ventas
+            const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(salesChartCtx, {
+                type: 'line',
+                data: {
+                    labels: ['01/06', '02/06', '03/06', '04/06', '05/06', '06/06', '07/06'],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [1250000, 1580000, 1320000, 1890000, 2150000, 1950000, 2320000],
+                        backgroundColor: 'rgba(123, 76, 255, 0.2)',
+                        borderColor: 'rgba(123, 76, 255, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString('es-CL');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de plataformas
+            const platformChartCtx = document.getElementById('platformChart').getContext('2d');
+            const platformChart = new Chart(platformChartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['PC', 'PlayStation', 'Xbox', 'Nintendo'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            'rgba(123, 76, 255, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(255, 99, 132, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(123, 76, 255, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((acc, data) => acc + data, 0);
+                                    const percentage = Math.round((value * 100) / total) + '%';
+                                    return `${label}: ${percentage}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de adquisición de clientes
+            const customerAcquisitionChartCtx = document.getElementById('customerAcquisitionChart')?.getContext('2d');
+            if (customerAcquisitionChartCtx) {
+                const customerAcquisitionChart = new Chart(customerAcquisitionChartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Nuevos Clientes',
+                            data: [120, 145, 180, 210, 250, 342],
+                            backgroundColor: 'rgba(123, 76, 255, 0.2)',
+                            borderColor: 'rgba(123, 76, 255, 1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Gráfico de segmentación de clientes
+            const customerSegmentationChartCtx = document.getElementById('customerSegmentationChart')?.getContext('2d');
+            if (customerSegmentationChartCtx) {
+                const customerSegmentationChart = new Chart(customerSegmentationChartCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Nuevos', 'Ocasionales', 'Recurrentes', 'VIP'],
+                        datasets: [{
+                            data: [25, 35, 30, 10],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(123, 76, 255, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(123, 76, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Gráfico de ventas por categoría
+            const categorySalesChartCtx = document.getElementById('categorySalesChart')?.getContext('2d');
+            if (categorySalesChartCtx) {
+                const categorySalesChart = new Chart(categorySalesChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['RPG', 'Acción', 'Deportes', 'Aventura', 'Estrategia', 'Simulación'],
+                        datasets: [{
+                            label: 'Ventas por Categoría',
+                            data: [6500000, 4200000, 3800000, 2500000, 1800000, 1200000],
+                            backgroundColor: 'rgba(123, 76, 255, 0.8)',
+                            borderColor: 'rgba(123, 76, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toLocaleString('es-CL');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Gráfico de ventas por plataforma
+            const platformSalesChartCtx = document.getElementById('platformSalesChart')?.getContext('2d');
+            if (platformSalesChartCtx) {
+                const platformSalesChart = new Chart(platformSalesChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['PC', 'PlayStation', 'Xbox', 'Nintendo'],
+                        datasets: [{
+                            label: 'Ventas por Plataforma',
+                            data: [7800000, 5200000, 2500000, 1800000],
+                            backgroundColor: [
+                                'rgba(123, 76, 255, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(255, 99, 132, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(123, 76, 255, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toLocaleString('es-CL');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Gráfico de rendimiento de campañas
+            const campaignPerformanceChartCtx = document.getElementById('campaignPerformanceChart')?.getContext('2d');
+            if (campaignPerformanceChartCtx) {
+                const campaignPerformanceChart = new Chart(campaignPerformanceChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Cyber Week', 'Verano 2024', 'Día del Gamer', 'Ofertas Flash', 'Navidad'],
+                        datasets: [{
+                            label: 'Ventas',
+                            data: [4500000, 3200000, 2800000, 2100000, 1800000],
+                            backgroundColor: 'rgba(123, 76, 255, 0.8)',
+                            borderColor: 'rgba(123, 76, 255, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        }, {
+                            label: 'Conversión (%)',
+                            data: [8.2, 6.7, 5.4, 4.8, 3.9],
+                            backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            type: 'line',
+                            yAxisID: 'y1'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            if (context.dataset.label === 'Ventas') {
+                                                label += new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(context.parsed.y);
+                                            } else {
+                                                label += context.parsed.y + '%';
+                                            }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toLocaleString('es-CL');
+                                    }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                beginAtZero: true,
+                                grid: {
+                                    drawOnChartArea: false
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Gráfico de fuentes de tráfico
+            const trafficSourcesChartCtx = document.getElementById('trafficSourcesChart')?.getContext('2d');
+            if (trafficSourcesChartCtx) {
+                const trafficSourcesChart = new Chart(trafficSourcesChartCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Búsqueda Orgánica', 'Redes Sociales', 'Email', 'Directo', 'Referidos', 'Otros'],
+                        datasets: [{
+                            data: [35, 25, 15, 12, 8, 5],
+                            backgroundColor: [
+                                'rgba(123, 76, 255, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(255, 205, 86, 0.8)',
+                                'rgba(201, 203, 207, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(123, 76, 255, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(201, 203, 207, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed || 0;
+                                        const total = context.dataset.data.reduce((acc, data) => acc + data, 0);
+                                        const percentage = Math.round((value * 100) / total) + '%';
+                                        return `${label}: ${percentage}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Manejo de cambio de rango de fechas
+            document.getElementById('dateRangePreset').addEventListener('change', function() {
+                const startDateInput = document.getElementById('startDate');
+                const endDateInput = document.getElementById('endDate');
+                const today = new Date();
+                
+                switch(this.value) {
+                    case 'today':
+                        startDateInput.valueAsDate = today;
+                        endDateInput.valueAsDate = today;
+                        break;
+                    case 'yesterday':
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        startDateInput.valueAsDate = yesterday;
+                        endDateInput.valueAsDate = yesterday;
+                        break;
+                    case 'last7days':
+                        const last7days = new Date(today);
+                        last7days.setDate(last7days.getDate() - 6);
+                        startDateInput.valueAsDate = last7days;
+                        endDateInput.valueAsDate = today;
+                        break;
+                    case 'last30days':
+                        const last30days = new Date(today);
+                        last30days.setDate(last30days.getDate() - 29);
+                        startDateInput.valueAsDate = last30days;
+                        endDateInput.valueAsDate = today;
+                        break;
+                    case 'thisMonth':
+                        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+                        startDateInput.valueAsDate = firstDayOfMonth;
+                        endDateInput.valueAsDate = today;
+                        break;
+                    case 'lastMonth':
+                        const firstDayOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                        const lastDayOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                        startDateInput.valueAsDate = firstDayOfLastMonth;
+                        endDateInput.valueAsDate = lastDayOfLastMonth;
+                        break;
+                    case 'thisYear':
+                        const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+                        startDateInput.valueAsDate = firstDayOfYear;
+                        endDateInput.valueAsDate = today;
+                        break;
+                    case 'custom':
+                        // No hacer nada, dejar que el usuario seleccione las fechas
+                        break;
+                }
+            });
+            
+            // Manejo de tabs de reportes
+            document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Actualizar los gráficos cuando se muestran
+                    setTimeout(() => {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

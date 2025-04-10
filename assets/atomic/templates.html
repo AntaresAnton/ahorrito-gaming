@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorrito Gaming - Plantillas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7b4cff;
+            --secondary: #ff4c8e;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --accent: #00e5ff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --dark-card: #1e1e1e;
+            --dark-element: #2d2d2d;
+            --footer-bg: #0a0a0a;
+            --border-color: #333;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 20px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        
+        .component-title {
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #6a3bff;
+            border-color: #6a3bff;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #ff3b82;
+            border-color: #ff3b82;
+        }
+        
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .game-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .discount-badge {
+            background-color: var(--secondary);
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .category-icon {
+            background-color: #2d2d2d;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .category-item:hover .category-icon {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .search-bar {
+            border: 1px solid #333;
+            background-color: #1e1e1e;
+            color: white;
+        }
+        
+        .search-bar:focus {
+            background-color: #2d2d2d;
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+        
+        .template-preview {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .template-preview img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .template-info {
+            padding: 15px;
+            background-color: var(--dark-card);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-5">Ahorrito Gaming - Plantillas</h1>
+        
+        <section class="section">
+            <h2 class="component-title">Plantillas de Páginas</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Página+Principal" alt="Página Principal">
+                        <div class="template-info">
+                            <h4>Página Principal</h4>
+                            <p>Plantilla para la página de inicio con todas las secciones principales.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Página+Principal" alt="Página Principal">
+                        <div class="template-info">
+                            <h4>Página Principal</h4>
+                            <p>Plantilla para la página de inicio con todas las secciones principales.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Página+de+Producto" alt="Página de Producto">
+                        <div class="template-info">
+                            <h4>Página de Producto</h4>
+                            <p>Plantilla detallada para la visualización de un juego individual.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Carrito+de+Compras" alt="Carrito de Compras">
+                        <div class="template-info">
+                            <h4>Carrito de Compras</h4>
+                            <p>Plantilla para el carrito de compras con resumen de pedido.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Checkout" alt="Checkout">
+                        <div class="template-info">
+                            <h4>Checkout</h4>
+                            <p>Plantilla para el proceso de pago y finalización de compra.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Catálogo" alt="Catálogo">
+                        <div class="template-info">
+                            <h4>Catálogo</h4>
+                            <p>Plantilla para mostrar el catálogo completo de juegos con filtros.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="template-preview">
+                        <img src="https://placehold.co/800x600?text=Blog" alt="Blog">
+                        <div class="template-info">
+                            <h4>Blog</h4>
+                            <p>Plantilla para la sección de blog y artículos de noticias.</p>
+                            <a href="#" class="btn btn-primary">Ver plantilla</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Página Principal -->
+        <section class="section">
+            <h2 class="component-title">Página Principal</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Página+Principal" alt="Vista Previa Página Principal">
+                <div class="template-info">
+                    <h3>Estructura de la Página Principal</h3>
+                    <ol>
+                        <li>Navbar principal con logo, búsqueda y enlaces de usuario</li>
+                        <li>Navbar secundario con categorías de productos</li>
+                        <li>Hero section con llamada a la acción principal</li>
+                        <li>Categorías populares con iconos</li>
+                        <li>Sección de ofertas flash con temporizador</li>
+                        <li>Juegos populares</li>
+                        <li>Pre-compras destacadas</li>
+                        <li>Pestañas por plataforma (PC, PlayStation, Xbox, Nintendo)</li>
+                        <li>DLCs y expansiones</li>
+                        <li>Tarjetas de regalo</li>
+                        <li>Sección "¿Por qué elegirnos?"</li>
+                        <li>Formulario de suscripción al boletín</li>
+                        <li>Últimas noticias del blog</li>
+                        <li>Reseñas de clientes</li>
+                        <li>Footer con enlaces y métodos de pago</li>
+                        <li>Banner de cookies y botón volver arriba</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Página de Producto -->
+        <section class="section">
+            <h2 class="component-title">Página de Producto</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Página+de+Producto" alt="Vista Previa Página de Producto">
+                <div class="template-info">
+                    <h3>Estructura de la Página de Producto</h3>
+                    <ol>
+                        <li>Navbar principal y secundario (igual que en la página principal)</li>
+                        <li>Galería de imágenes del juego (imagen principal y miniaturas)</li>
+                        <li>Información del producto:
+                            <ul>
+                                <li>Título, valoración y descripción breve</li>
+                                <li>Precio con descuento (si aplica) y botón de compra</li>
+                                <li>Detalles del juego (desarrollador, editor, fecha de lanzamiento)</li>
+                                <li>Características principales</li>
+                                <li>Requisitos del sistema (mínimos y recomendados)</li>
+                                <li>Botones de compartir y soporte</li>
+                            </ul>
+                        </li>
+                        <li>Pestañas con información adicional:
+                            <ul>
+                                <li>Descripción detallada</li>
+                                <li>Capturas de pantalla y vídeos</li>
+                                <li>DLCs disponibles</li>
+                                <li>Reseñas de usuarios</li>
+                            </ul>
+                        </li>
+                        <li>Productos relacionados</li>
+                        <li>Footer</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Carrito de Compras -->
+        <section class="section">
+            <h2 class="component-title">Carrito de Compras</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Carrito+de+Compras" alt="Vista Previa Carrito de Compras">
+                <div class="template-info">
+                    <h3>Estructura del Carrito de Compras</h3>
+                    <ol>
+                        <li>Navbar principal y secundario</li>
+                        <li>Título de la página y contador de productos</li>
+                        <li>Lista de productos en el carrito:
+                            <ul>
+                                <li>Imagen del juego</li>
+                                <li>Nombre y plataforma</li>
+                                <li>Precio</li>
+                                <li>Botón para eliminar</li>
+                            </ul>
+                        </li>
+                        <li>Botones de acción (seguir comprando, vaciar carrito)</li>
+                        <li>Resumen del pedido:
+                            <ul>
+                                <li>Subtotal</li>
+                                <li>Descuento (si aplica)</li>
+                                <li>IVA</li>
+                                <li>Total</li>
+                            </ul>
+                        </li>
+                        <li>Campo para código promocional</li>
+                        <li>Botón para proceder al pago</li>
+                        <li>Métodos de pago aceptados</li>
+                        <li>Footer</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Checkout -->
+        <section class="section">
+            <h2 class="component-title">Checkout</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Checkout" alt="Vista Previa Checkout">
+                <div class="template-info">
+                    <h3>Estructura de la Página de Checkout</h3>
+                    <ol>
+                        <li>Navbar simplificado (solo logo)</li>
+                        <li>Indicador de progreso (carrito > pago > confirmación)</li>
+                        <li>Formulario de información de pago:
+                            <ul>
+                                <li>Correo electrónico</li>
+                                <li>Selección de método de pago</li>
+                                <li>Campos específicos según el método seleccionado</li>
+                                <li>Opción para guardar información para futuras compras</li>
+                            </ul>
+                        </li>
+                        <li>Resumen del pedido:
+                            <ul>
+                                <li>Lista de productos</li>
+                                <li>Subtotal, descuento, IVA</li>
+                                <li>Total a pagar</li>
+                            </ul>
+                        </li>
+                        <li>Información adicional (entrega de claves, política de reembolso)</li>
+                        <li>Botones de navegación (volver al carrito, completar compra)</li>
+                        <li>Footer simplificado</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Catálogo -->
+        <section class="section">
+            <h2 class="component-title">Catálogo</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Catálogo" alt="Vista Previa Catálogo">
+                <div class="template-info">
+                    <h3>Estructura de la Página de Catálogo</h3>
+                    <ol>
+                        <li>Navbar principal y secundario</li>
+                        <li>Título de la página y contador de resultados</li>
+                        <li>Barra de filtros:
+                            <ul>
+                                <li>Filtro por plataforma</li>
+                                <li>Filtro por género</li>
+                                <li>Filtro por precio</li>
+                                <li>Filtro por valoración</li>
+                                <li>Ordenar por (relevancia, precio, fecha)</li>
+                            </ul>
+                        </li>
+                        <li>Vista de productos (grid o lista)</li>
+                        <li>Tarjetas de productos:
+                            <ul>
+                                <li>Imagen</li>
+                                <li>Título</li>
+                                <li>Plataforma</li>
+                                <li>Precio (con descuento si aplica)</li>
+                                <li>Botón de añadir al carrito</li>
+                            </ul>
+                        </li>
+                        <li>Paginación</li>
+                        <li>Footer</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog -->
+        <section class="section">
+            <h2 class="component-title">Blog</h2>
+            
+            <div class="template-preview">
+                <img src="https://placehold.co/1200x800?text=Vista+Previa+Blog" alt="Vista Previa Blog">
+                <div class="template-info">
+                    <h3>Estructura de la Página de Blog</h3>
+                    <ol>
+                        <li>Navbar principal y secundario</li>
+                        <li>Banner del blog</li>
+                        <li>Artículos destacados (slider)</li>
+                        <li>Categorías de artículos</li>
+                        <li>Lista de artículos:
+                            <ul>
+                                <li>Imagen destacada</li>
+                                <li>Fecha y autor</li>
+                                <li>Título</li>
+                                <li>Extracto</li>
+                                <li>Botón "Leer más"</li>
+                                <li>Etiquetas</li>
+                            </ul>
+                        </li>
+                        <li>Barra lateral:
+                            <ul>
+                                <li>Búsqueda</li>
+                                <li>Artículos populares</li>
+                                <li>Categorías</li>
+                                <li>Etiquetas populares</li>
+                                <li>Suscripción al boletín</li>
+                            </ul>
+                        </li>
+                        <li>Paginación</li>
+                        <li>Footer</li>
+                    </ol>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary">Ver código HTML completo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

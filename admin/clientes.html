@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Clientes - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        .admin-sidebar {
+            min-height: calc(100vh - 56px);
+            background-color: #121212;
+            border-right: 1px solid #333;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        .form-control, .form-select {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #fff;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            border-color: #7b4cff;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(123, 76, 255, 0.25);
+        }
+        
+        .modal-content {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+        
+        .modal-header, .modal-footer {
+            border-color: #333;
+        }
+        
+        .customer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .customer-detail-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: #7b4cff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-gamepad me-2 text-primary"></i>
+                <span style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Ahorrito Gaming</span>
+                <span class="badge bg-danger ms-2">Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill bg-danger">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                            <li><a class="dropdown-item" href="#">Nuevo pedido #AG-2024-1235</a></li>
+                            <li><a class="dropdown-item" href="#">Stock bajo: Cyberpunk 2077</a></li>
+                            <li><a class="dropdown-item" href="#">Nueva reseña pendiente</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-store me-2"></i>Ver tienda</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 admin-sidebar">
+                <div class="d-flex flex-column flex-shrink-0 p-3">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link text-white">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link text-white">
+                                <i class="fas fa-gamepad me-2"></i>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="categorias.html" class="nav-link text-white">
+                                <i class="fas fa-tags me-2"></i>
+                                Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pedidos.html" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link active" aria-current="page">
+                                <i class="fas fa-users me-2"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="resenas.html" class="nav-link text-white">
+                                <i class="fas fa-star me-2"></i>
+                                Reseñas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cupones.html" class="nav-link text-white">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Cupones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link text-white">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configuracion.html" class="nav-link text-white">
+                                <i class="fas fa-cog me-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Administración de Clientes</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                        <i class="fas fa-user-plus me-2"></i>Agregar Cliente
+                    </button>
+                </div>
+                
+                <!-- Filters -->
+                <div class="card bg-dark border-secondary mb-4">
+                    <div class="card-header bg-dark border-secondary">
+                        <h5 class="card-title mb-0">Filtros</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterName" class="form-label">Nombre o Email</label>
+                                <input type="text" class="form-control" id="filterName" placeholder="Buscar...">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterStatus" class="form-label">Estado</label>
+                                <select class="form-select" id="filterStatus">
+                                    <option value="">Todos</option>
+                                    <option value="active">Activos</option>
+                                    <option value="inactive">Inactivos</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterMembership" class="form-label">Membresía</label>
+                                <select class="form-select" id="filterMembership">
+                                    <option value="">Todas</option>
+                                    <option value="standard">Estándar</option>
+                                    <option value="premium">Premium</option>
+                                    <option value="vip">VIP</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="filterDate" class="form-label">Fecha Registro</label>
+                                <select class="form-select" id="filterDate">
+                                    <option value="">Todas</option>
+                                    <option value="today">Hoy</option>
+                                    <option value="week">Esta semana</option>
+                                    <option value="month">Este mes</option>
+                                    <option value="year">Este año</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button class="btn btn-primary me-2" id="applyFilters">
+                                    <i class="fas fa-filter me-2"></i>Aplicar Filtros
+                                </button>
+                                <button class="btn btn-outline-secondary" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i>Resetear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customers Table -->
+                <div class="card bg-dark border-secondary">
+                    <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Clientes</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary me-2" title="Exportar">
+                                <i class="fas fa-file-export me-1"></i>Exportar
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" title="Imprimir">
+                                <i class="fas fa-print me-1"></i>Imprimir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Email</th>
+                                        <th>Teléfono</th>
+                                        <th>Fecha Registro</th>
+                                        <th>Pedidos</th>
+                                        <th>Gasto Total</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CLI-001</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://placehold.co/100x100" class="customer-avatar me-2" alt="Avatar">
+                                                <div>
+                                                    <span>Carlos Rodríguez</span>
+                                                    <small class="d-block text-primary">Premium</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>carlos.rodriguez@example.com</td>
+                                        <td>+56 9 1234 5678</td>
+                                        <td>15/01/2024</td>
+                                        <td>12</td>
+                                        <td>$458.990</td>
+                                        <td><span class="badge bg-success">Activo</span></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCustomerModal"><i class="fas fa-eye"></i></button>
+                                                <button class="btn btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CLI-002</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://placehold.co/100x100" class="customer-avatar me-2" alt="Avatar">
+                                                <div>
+                                                    <span>Laura Martínez</span>
+                                                    <small class="d-block text-warning">VIP</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>laura.martinez@example.com</td>
+                                        <td>
+                                            <td>+56 9 8765 4321</td>
+                                            <td>03/02/2024</td>
+                                            <td>25</td>
+                                            <td>$1.250.990</td>
+                                            <td><span class="badge bg-success">Activo</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCustomerModal"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CLI-003</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://placehold.co/100x100" class="customer-avatar me-2" alt="Avatar">
+                                                    <div>
+                                                        <span>Miguel Ángel Pérez</span>
+                                                        <small class="d-block text-muted">Estándar</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>miguel.perez@example.com</td>
+                                            <td>+56 9 5555 6666</td>
+                                            <td>20/03/2024</td>
+                                            <td>5</td>
+                                            <td>$120.990</td>
+                                            <td><span class="badge bg-success">Activo</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCustomerModal"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CLI-004</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://placehold.co/100x100" class="customer-avatar me-2" alt="Avatar">
+                                                    <div>
+                                                        <span>Ana Gómez</span>
+                                                        <small class="d-block text-primary">Premium</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>ana.gomez@example.com</td>
+                                            <td>+56 9 7777 8888</td>
+                                            <td>05/04/2024</td>
+                                            <td>8</td>
+                                            <td>$320.990</td>
+                                            <td><span class="badge bg-success">Activo</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCustomerModal"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CLI-005</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://placehold.co/100x100" class="customer-avatar me-2" alt="Avatar">
+                                                    <div>
+                                                        <span>Javier López</span>
+                                                        <small class="d-block text-muted">Estándar</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>javier.lopez@example.com</td>
+                                            <td>+56 9 3333 4444</td>
+                                            <td>12/05/2024</td>
+                                            <td>2</td>
+                                            <td>$45.990</td>
+                                            <td><span class="badge bg-secondary">Inactivo</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" title="Ver" data-bs-toggle="modal" data-bs-target="#viewCustomerModal"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-outline-warning" title="Editar"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-secondary">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Siguiente</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- View Customer Modal -->
+        <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewCustomerModalLabel">Detalles del Cliente</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-4 mb-md-0">
+                                <img src="https://placehold.co/100x100" class="customer-detail-avatar mb-3" alt="Avatar">
+                                <h4>Carlos Rodríguez</h4>
+                                <span class="badge bg-primary mb-2">Premium</span>
+                                <p class="mb-1"><i class="fas fa-envelope me-2"></i>carlos.rodriguez@example.com</p>
+                                <p class="mb-1"><i class="fas fa-phone me-2"></i>+56 9 1234 5678</p>
+                                <p class="mb-3"><i class="fas fa-calendar me-2"></i>Cliente desde: 15/01/2024</p>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-envelope me-2"></i>Enviar Email
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit me-2"></i>Editar
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <ul class="nav nav-pills mb-3" id="customerDetailsTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">Pedidos</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="wishlist-tab" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab">Lista de Deseos</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reseñas</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">Notas</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="customerDetailsTabsContent">
+                                    <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-dark table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estado</th>
+                                                        <th>Total</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>#AG-2024-1235</td>
+                                                        <td>10/06/2024</td>
+                                                        <td><span class="badge bg-success">Completado</span></td>
+                                                        <td>$54.990</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#AG-2024-1180</td>
+                                                        <td>28/05/2024</td>
+                                                        <td><span class="badge bg-success">Completado</span></td>
+                                                        <td>$79.990</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#AG-2024-1120</td>
+                                                        <td>15/05/2024</td>
+                                                        <td><span class="badge bg-success">Completado</span></td>
+                                                        <td>$24.990</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="wishlist" role="tabpanel" aria-labelledby="wishlist-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-dark table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Producto</th>
+                                                        <th>Plataforma</th>
+                                                        <th>Precio</th>
+                                                        <th>Disponibilidad</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>GTA VI</td>
+                                                        <td>PS5</td>
+                                                        <td>$64.990</td>
+                                                        <td><span class="badge bg-warning text-dark">Pre-compra</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Elden Ring: Shadow of the Erdtree</td>
+                                                        <td>PC</td>
+                                                        <td>$32.990</td>
+                                                        <td><span class="badge bg-success">Disponible</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-dark table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Producto</th>
+                                                        <th>Calificación</th>
+                                                        <th>Fecha</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Cyberpunk 2077</td>
+                                                        <td>
+                                                            <div class="text-warning">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                            </div>
+                                                        </td>
+                                                        <td>20/05/2024</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Elden Ring</td>
+                                                        <td>
+                                                            <div class="text-warning">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                        </div>
+                                                    </td>
+                                                    <td>15/04/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                                    <div class="mb-3">
+                                        <div class="card bg-dark border-secondary mb-3">
+                                            <div class="card-header bg-dark border-secondary d-flex justify-content-between">
+                                                <span>Nota de Soporte - 12/06/2024</span>
+                                                <span class="text-muted">Admin</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Cliente solicitó información sobre próximas ofertas de juegos de PlayStation. Se le informó sobre las ofertas flash de la próxima semana.</p>
+                                            </div>
+                                        </div>
+                                        <div class="card bg-dark border-secondary">
+                                            <div class="card-header bg-dark border-secondary d-flex justify-content-between">
+                                                <span>Nota de Soporte - 05/05/2024</span>
+                                                <span class="text-muted">Admin</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Cliente reportó problema con clave de activación de Cyberpunk 2077. Se verificó y se envió una nueva clave. Cliente satisfecho con la resolución.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="text" class="form-control me-2" placeholder="Agregar una nota...">
+                                        <button class="btn btn-primary">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCustomerModalLabel">Agregar Nuevo Cliente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="customerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="customerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerPhone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="customerPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="customerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerMembership" class="form-label">Membresía</label>
+                            <select class="form-select" id="customerMembership">
+                                <option value="standard">Estándar</option>
+                                <option value="premium">Premium</option>
+                                <option value="vip">VIP</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="customerActive" checked>
+                            <label class="form-check-label" for="customerActive">Activo</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="customerNewsletter">
+                            <label class="form-check-label" for="customerNewsletter">Suscribir al boletín</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/scripts.js"></script>
+</body>
+</html>
