@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 403 - Acceso prohibido | Ahorrito Gaming</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <style>
+        .error-page {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-code {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #dc3545;
+            text-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+        }
+        .error-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: #dc3545;
+        }
+        .error-card {
+            border: 2px solid rgba(220, 53, 69, 0.3);
+            background-color: rgba(33, 37, 41, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .shield-animation {
+            animation: shake 2s infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <!-- Incluir menú -->
+    <div id="menu-container"></div>
+
+    <div class="container error-page">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card error-card p-4 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-ban error-icon shield-animation"></i>
+                        <h1 class="error-code">403</h1>
+                        <h2 class="mb-4">Acceso prohibido</h2>
+                        <p class="lead mb-4">No tienes permisos para acceder a este recurso. El servidor ha entendido tu solicitud pero se niega a autorizarla.</p>
+                        
+                        <div class="alert alert-dark" role="alert">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            <span>Posibles razones:</span>
+                            <ul class="text-start mt-2">
+                                <li>Tu cuenta no tiene los permisos necesarios</li>
+                                <li>Estás intentando acceder a un área restringida</li>
+                                <li>El recurso puede estar protegido por IP o geolocalización</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <a href="../index.html" class="btn btn-primary me-3">
+                                <i class="fas fa-home me-2"></i>Volver al inicio
+                            </a>
+                            <a href="../contacto.html" class="btn btn-outline-light">
+                                <i class="fas fa-headset me-2"></i>Contactar soporte
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluir footer -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        // Cargar componentes
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../includes/menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-container').innerHTML = data;
+                });
+                
+            fetch('../includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 502 - Puerta de enlace incorrecta | Ahorrito Gaming</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <style>
+        .error-page {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-code {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #6f42c1;
+            text-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+        }
+        .error-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: #6f42c1;
+        }
+        .error-card {
+            border: 2px solid rgba(111, 66, 193, 0.3);
+            background-color: rgba(33, 37, 41, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .gateway-animation {
+            animation: flash 2s linear infinite;
+        }
+        @keyframes flash {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <!-- Incluir menú -->
+    <div id="menu-container"></div>
+
+    <div class="container error-page">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card error-card p-4 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-network-wired error-icon gateway-animation"></i>
+                        <h1 class="error-code">502</h1>
+                        <h2 class="mb-4">Puerta de enlace incorrecta</h2>
+                        <p class="lead mb-4">Nuestro servidor recibió una respuesta no válida del servidor ascendente mientras intentaba procesar tu solicitud.</p>
+                        
+                        <div class="alert alert-dark" role="alert">
+                            <i class="fas fa-server me-2"></i>
+                            <span>¿Qué está pasando?</span>
+                            <ul class="text-start mt-2">
+                                <li>Puede ser un problema temporal con nuestros servidores</li>
+                                <li>Es posible que estemos realizando actualizaciones</li>
+                                <li>Nuestros servicios de backend podrían estar experimentando problemas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <button class="btn btn-primary me-3" onclick="window.location.reload()">
+                                <i class="fas fa-sync-alt me-2"></i>Intentar nuevamente
+                            </button>
+                            <a href="../index.html" class="btn btn-outline-light">
+                                <i class="fas fa-home me-2"></i>Volver al inicio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluir footer -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        // Cargar componentes
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../includes/menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-container').innerHTML = data;
+                });
+                
+            fetch('../includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
