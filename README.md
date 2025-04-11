@@ -65,11 +65,16 @@ Este repositorio contiene un mockup funcional UX/UI para la web Ahorrito Gaming,
  ┣ 📂 css                        # Estilos
  ┃ ┗ 📄 styles.css               # Hoja de estilos principal
  ┣ 📂 img                        # Imágenes y recursos gráficos
- ┣ 📂 js                         # JavaScript
- ┃ ┗ 📄 scripts.js               # Scripts principales
  ┣ 📂 includes                   # Componentes reutilizables
  ┃ ┣ 📄 footer.html              # Pie de página
  ┃ ┗ 📄 menu.html                # Menú de navegación
+ ┣ 📂 js                         # JavaScript
+ ┃ ┗ 📄 scripts.js               # Scripts principales
+ ┣ 📂 status                     # Páginas de estado del sistema
+ ┃ ┣ 📄 404.html                 # Página de error 404
+ ┃ ┣ 📄 500.html                 # Página de error 500
+ ┃ ┣ 📄 en-construccion.html     # Página en construcción
+ ┃ ┗ 📄 mantenimiento.html       # Página de mantenimiento
  ┣ 📂 utils                      # Utilidades
  ┣ 📄 .gitattributes             # Configuración de Git
  ┣ 📄 afiliados.html             # Página de programa de afiliados
@@ -81,7 +86,7 @@ Este repositorio contiene un mockup funcional UX/UI para la web Ahorrito Gaming,
  ┣ 📄 devoluciones.html          # Política de devoluciones
  ┣ 📄 directorios.bat            # Script para generar estructura
  ┣ 📄 dlcs.html                  # Página de DLCs
- ┣ 📄 estructura_20250410.txt    # Estructura del proyecto
+ ┣ 📄 estructura_20250411.txt    # Estructura del proyecto actualizada
  ┣ 📄 faq.html                   # Preguntas frecuentes
  ┣ 📄 favoritos.html             # Lista de favoritos
  ┣ 📄 giftcards.html             # Tarjetas de regalo
@@ -103,6 +108,7 @@ Este repositorio contiene un mockup funcional UX/UI para la web Ahorrito Gaming,
  ┣ 📄 software.html              # Software
  ┣ 📄 terminos.html              # Términos y condiciones
  ┗ 📄 xbox.html                  # Productos Xbox
+
 ```
 
 # Componentes Reutilizables: Sistema de Includes 🧩

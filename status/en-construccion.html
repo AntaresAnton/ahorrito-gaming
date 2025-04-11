@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Próximamente - Ahorrito Gaming</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .construction-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .logo {
+            max-width: 300px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        .construction-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #7b4cff, #ff4c8e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        .construction-message {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+        .launch-countdown {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #7b4cff, #ff4c8e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #7b4cff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .newsletter-form {
+            max-width: 500px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        .form-control {
+            background-color: #2a2a2a;
+            border: none;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 50px 0 0 50px;
+        }
+        .form-control:focus {
+            background-color: #333;
+            color: #ffffff;
+            box-shadow: none;
+            border-color: #7b4cff;
+        }
+        .btn-subscribe {
+            background-color: #7b4cff;
+            border-color: #7b4cff;
+            color: #ffffff;
+            border-radius: 0 50px 50px 0;
+            padding: 15px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-subscribe:hover {
+            background-color: #6a3de8;
+            border-color: #6a3de8;
+        }
+        .social-links {
+            margin-top: 2rem;
+        }
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #2a2a2a;
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: #7b4cff;
+            transform: translateY(-5px);
+        }
+        .construction-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            color: #ff4c8e;
+        }
+        .floating-game-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .game-icon {
+            position: absolute;
+            color: rgba(123, 76, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container construction-container">
+        <div class="floating-game-icons">
+            <!-- Iconos flotantes de videojuegos -->
+            <i class="fas fa-gamepad game-icon" style="left: 10%; font-size: 2rem; animation-duration: 20s;"></i>
+            <i class="fas fa-ghost game-icon" style="left: 25%; font-size: 3rem; animation-duration: 15s; animation-delay: 2s;"></i>
+            <i class="fas fa-dice-d20 game-icon" style="left: 40%; font-size: 2.5rem; animation-duration: 18s; animation-delay: 5s;"></i>
+            <i class="fas fa-headset game-icon" style="left: 60%; font-size: 2.8rem; animation-duration: 22s; animation-delay: 3s;"></i>
+            <i class="fas fa-chess-knight game-icon" style="left: 75%; font-size: 2.2rem; animation-duration: 17s; animation-delay: 7s;"></i>
+            <i class="fas fa-dragon game-icon" style="left: 90%; font-size: 3.2rem; animation-duration: 25s; animation-delay: 1s;"></i>
+        </div>
+        
+        <img src="/assets/images/logo.png" alt="Ahorrito Gaming" class="logo">
+        <i class="fas fa-hammer construction-icon"></i>
+        <h1 class="construction-title">Próximamente</h1>
+        <p class="construction-message">Estamos construyendo la mejor tienda de juegos digitales en Chile. Prepárate para descubrir ofertas increíbles, precios imbatibles y una experiencia de compra única.</p>
+        
+        <div class="launch-countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">15</div>
+                <div class="countdown-label">Días</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">08</div>
+                <div class="countdown-label">Horas</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">45</div>
+                <div class="countdown-label">Minutos</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">30</div>
+                <div class="countdown-label">Segundos</div>
+            </div>
+        </div>
+        
+        <p>¿Quieres ser el primero en enterarte cuando lancemos?</p>
+        
+        <div class="newsletter-form">
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="Tu correo electrónico" aria-label="Tu correo electrónico">
+                <button class="btn btn-subscribe" type="button">Notifícame</button>
+            </div>
+        </div>
+        
+        <p>Síguenos en nuestras redes sociales para estar al tanto de nuestro progreso:</p>
+        
+        <div class="social-links">
+            <a href="https://facebook.com/ahorritogaming" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/ahorritogaming" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/ahorritogaming" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/ahorritogaming" target="_blank"><i class="fab fa-discord"></i></a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fecha de lanzamiento (15 días a partir de hoy)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 15);
+        
+        // Actualizar el contador cada segundo
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Mostrar resultados
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            // Si la cuenta regresiva termina
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
