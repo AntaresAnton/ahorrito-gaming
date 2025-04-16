@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Técnica - Ahorrito Gaming</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7b4cff;
+            --secondary-color: #ff4c8e;
+            --dark-color: #121212;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background: #6a3dd9;
+            border-color: #6a3dd9;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #e6437f;
+            border-color: #e6437f;
+        }
+        
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .text-secondary {
+            color: var(--secondary-color) !important;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .list-group-item {
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .list-group-item:hover {
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(123, 76, 255, 0.05);
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 4px;
+            color: var(--primary-color);
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gamepad me-2"></i>Ahorrito Gaming
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Documentación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Repositorio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h1 class="fw-bold">Documentación Técnica</h1>
+                <p class="lead">Implementación de Ahorrito Gaming con Django</p>
+            </div>
+        </div>
+
+        <!-- Visión General -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0">Visión General</h2>
+            </div>
+            <div class="card-body">
+                <p>Ahorrito Gaming es una plataforma de e-commerce especializada en la venta de videojuegos digitales, implementada como una aplicación web completa utilizando Django. El proyecto mantiene el diseño visual del mockup original pero implementa toda la funcionalidad backend con Django.</p>
+            </div>
+        </div>
+
+        <!-- Stack Tecnológico -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0">Stack Tecnológico</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Backend -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fab fa-python tech-icon"></i>
+                                <h3 class="h5 fw-bold">Backend</h3>
+                                <ul class="list-group list-group-flush text-start">
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django:</strong> Framework web de Python (MVC)</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django ORM:</strong> Para interacción con la base de datos</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Templates:</strong> Sistema de plantillas</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Forms:</strong> Gestión de formularios</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Authentication:</strong> Sistema de usuarios</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Base de datos -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-database tech-icon"></i>
+                                <h3 class="h5 fw-bold">Base de Datos</h3>
+                                <ul class="list-group list-group-flush text-start">
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>MySQL/PostgreSQL:</strong> Base de datos relacional</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Migraciones de Django:</strong> Gestión de esquemas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-code tech-icon"></i>
+                                <h3 class="h5 fw-bold">Frontend</h3>
+                                <ul class="list-group list-group-flush text-start">
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>HTML5/CSS3:</strong> Estructura y estilos</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Bootstrap 5:</strong> Framework CSS responsive</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>JavaScript:</strong> Interactividad cliente</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Static Files:</strong> Gestión de estáticos</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Media Files:</strong> Archivos de usuario</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Herramientas adicionales -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tools tech-icon"></i>
+                                <h3 class="h5 fw-bold">Herramientas Adicionales</h3>
+                                <ul class="list-group list-group-flush text-start">
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django Admin:</strong> Panel de administración</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Django REST Framework:</strong> APIs</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Celery:</strong> Tareas asíncronas</li>
+                                    <li class="list-group-item"><i class="fas fa-check-circle text-primary me-2"></i><strong>Redis/Memcached:</strong> Caché y rendimiento</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arquitectura del Proyecto -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0">Arquitectura del Proyecto</h2>
+            </div>
+            <div class="card-body">
+                <h3 class="section-title">Estructura de Aplicaciones Django</h3>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>core:</strong> Configuración central</li>
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>productos:</strong> Gestión de juegos y categorías</li>
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>usuarios:</strong> Autenticación y perfiles</li>
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>carrito:</strong> Sistema de compras</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>pedidos:</strong> Gestión de pedidos</li>
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>blog:</strong> Sistema de blog</li>
+                            <li class="list-group-item"><i class="fas fa-folder text-primary me-2"></i><strong>paginas:</strong> Contenido estático</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Modelos Principales</h3>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Producto:</strong> Juegos, DLCs y productos</li>
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Categoría/Plataforma:</strong> Clasificación</li>
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Usuario:</strong> Extensión del modelo User</li>
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Carrito/ItemCarrito:</strong> Gestión de compras</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Pedido/DetallePedido:</strong> Registro de compras</li>
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Configuración:</strong> Parámetros del sistema</li>
+                            <li class="list-group-item"><i class="fas fa-table text-primary me-2"></i><strong>Página:</strong> Contenido estático</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Sistema de Plantillas</h3>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><i class="fas fa-file-code text-primary me-2"></i>Implementación de herencia de plantillas con base.html</li>
+                    <li class="list-group-item"><i class="fas fa-file-code text-primary me-2"></i>Conversión de los "includes" actuales a templates parciales de Django</li>
+                    <li class="list-group-item"><i class="fas fa-file-code text-primary me-2"></i>Uso de tags y filtros de Django para renderizado dinámico</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Funcionalidades Implementadas -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0">Funcionalidades Implementadas</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Catálogo de Productos</h4>
+                                <p class="mb-0">Filtrado por categorías, plataformas y búsqueda avanzada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-lock"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Sistema de Autenticación</h4>
+                                <p class="mb-0">Registro, login y recuperación de contraseña</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Carrito de Compras</h4>
+                                <p class="mb-0">Persistente con sesiones y base de datos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Gestión de Favoritos</h4>
+                                <p class="mb-0">Para usuarios registrados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Proceso de Checkout</h4>
+                                <p class="mb-0">Múltiples métodos de pago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Panel de Administración</h4>
+                                <p class="mb-0">Personalizado para gestión completa</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-blog"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Blog</h4>
+                                <p class="mb-0">Sistema de categorías y comentarios</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Páginas Estáticas</h4>
+                                <p class="mb-0">Gestionables desde el admin</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Sistema de Notificaciones</h4>
+                                <p class="mb-0">Para usuarios registrados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h4 class="h5 fw-bold">Integración con Pasarelas</h4>
+                                <p class="mb-0">WebPay, MercadoPago, PayPal, etc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventajas de la Implementación -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0">Ventajas de la Implementación con Django</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-shield-alt text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">Seguridad Robusta</h4>
+                                <p>Protección contra CSRF, XSS y otras vulnerabilidades comunes en aplicaciones web.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-expand-arrows-alt text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">Escalabilidad</h4>
+                                <p>Estructura modular que permite crecer según las necesidades del negocio.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-code-branch text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">Mantenibilidad</h4>
+                                <p>Separación clara entre lógica de negocio y presentación.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tachometer-alt text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">Rendimiento</h4>
+                                <p>Optimización de consultas a base de datos y sistema de caché.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-search text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">SEO-friendly</h4>
+                                <p>URLs amigables y metadatos dinámicos para mejor posicionamiento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-cog text-primary mb-3" style="font-size: 2rem;"></i>
+                                <h4 class="h5 fw-bold">Administración Sencilla</h4>
+                                <p>Panel de administración potente y personalizable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusión -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Conclusión</h2>
+            </div>
+            <div class="card-body">
+                <p>Esta implementación con Django transforma el mockup estático original en una aplicación web completa y funcional, manteniendo la identidad visual pero añadiendo toda la lógica de negocio necesaria para una tienda de videojuegos digitales.</p>
+                <p>La arquitectura modular de Django permite un desarrollo ágil y escalable, facilitando la incorporación de nuevas funcionalidades según las necesidades del negocio vayan evolucionando.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-gamepad me-2"></i>Ahorrito Gaming</h4>
+                    <p>Tu tienda de juegos digitales en Chile</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Documentación Técnica</p>
+                    <p>&copy; 2023 Ahorrito Gaming. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
