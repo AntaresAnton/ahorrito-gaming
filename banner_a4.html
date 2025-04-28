@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner A4 - Ahorrito Gaming</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7b4cff;
+            --secondary: #ff4c8e;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --accent: #00e5ff;
+            --neon-green: #39ff14;
+            --cyber-yellow: #ffd700;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .banner-container {
+            width: 210mm;
+            height: 297mm;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            box-shadow: 0 0 30px rgba(123, 76, 255, 0.5);
+        }
+        
+        .banner-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://placehold.co/1200x400?text=Gaming+Background');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(123, 76, 255, 0.1) 50%, transparent 100%),
+                linear-gradient(180deg, transparent 0%, rgba(0, 229, 255, 0.1) 50%, transparent 100%);
+            z-index: 1;
+        }
+        
+        .banner-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            z-index: 2;
+        }
+        
+        .banner-logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--light);
+            text-shadow: 0 0 15px var(--accent), 0 0 30px var(--primary);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .banner-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--accent), 0 0 20px var(--primary);
+            position: relative;
+            z-index: 3;
+            letter-spacing: 2px;
+        }
+        
+        .banner-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--light);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .banner-content {
+            padding: 30px;
+            background: url('https://placehold.co/800x800?text=Subtle+Grid+Pattern') repeat;
+            background-blend-mode: overlay;
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+        
+        .game-card {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(123, 76, 255, 0.4);
+        }
+        
+        .game-card:hover::before {
+            opacity: 1;
+        }
+        
+        .discount-badge {
+            background: linear-gradient(135deg, var(--secondary), #ff1f6d);
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(255, 76, 142, 0.7);
+            transform: rotate(5deg);
+            font-size: 1.1rem;
+        }
+        
+        .game-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+        }
+        
+        .banner-footer {
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%);
+            border-top: 2px solid var(--primary);
+            padding: 25px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #6a3bff);
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            margin: 10px;
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(123, 76, 255, 0.5);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(123, 76, 255, 0.7);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #ff1f6d);
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            margin: 10px;
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(255, 76, 142, 0.5);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+        
+        .btn-secondary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 76, 142, 0.7);
+        }
+        
+        .feature-section {
+            margin-bottom: 40px;
+        }
+        
+        .feature-box {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .feature-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                transparent, 
+                transparent, 
+                var(--primary)
+            );
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .feature-box:hover::before {
+            opacity: 0.1;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .feature-box h4 {
+            margin-bottom: 15px;
+            color: var(--light);
+            font-size: 1.4rem;
+        }
+        
+        .feature-box p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .platforms-section {
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.8), rgba(30, 30, 30, 0.8));
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .platforms-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--light);
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .platform-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            margin: 0 10px;
+            padding: 10px 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .bg-success {
+            background: linear-gradient(135deg, #28a745, #20c997) !important;
+        }
+        
+        .bg-primary {
+            background: linear-gradient(135deg, #007bff, #6610f2) !important;
+        }
+        
+        .bg-danger {
+            background: linear-gradient(135deg, #dc3545, #fd7e14) !important;
+        }
+        
+        .bg-warning {
+            background: linear-gradient(135deg, #ffc107, #ff9800) !important;
+        }
+        
+        .qr-code {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--primary);
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .social-icons i {
+            margin: 0 10px;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+        
+        .social-icons i:hover {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+        
+        .image-placeholder {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            margin-bottom: 20px;
+            border: 1px dashed #555;
+            font-size: 0.9rem;
+        }
+        
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--primary));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: neonGlow 3s ease infinite;
+        }
+        
+        @keyframes neonGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--light);
+            text-shadow: 0 0 10px var(--accent);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .cyber-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .cyber-divider::before {
+            content: '⬥';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--dark);
+            padding: 0 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <div class="banner-header">
+            <div class="banner-logo">Ahorrito Gaming</div>
+            <h1 class="banner-title">¡YA ESTAMOS OPERATIVOS!</h1>
+            <p class="banner-subtitle">Más de 10.000 juegos digitales al mejor precio en Chile</p>
+        </div>
+        
+        <div class="banner-content">
+            <h2 class="section-title">OFERTAS DESTACADAS</h2>
+            
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="game-card position-relative neon-border">
+                        <div class="discount-badge">-70%</div>
+                        <img src="https://placehold.co/600x300?text=Cyberpunk+2077" class="img-fluid" alt="Cyberpunk 2077">
+                        <div class="p-3">
+                            <h4>Cyberpunk 2077</h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted me-2">$45.990</span>
+                                    <span class="game-price">$13.790</span>
+                                </div>
+                                <span class="badge bg-success">PC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="game-card position-relative neon-border">
+                        <div class="discount-badge">-50%</div>
+                        <img src="https://placehold.co/600x300?text=Elden+Ring" class="img-fluid" alt="Elden Ring">
+                        <div class="p-3">
+                            <h4>Elden Ring</h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted me-2">$49.990</span>
+                                    <span class="game-price">$24.990</span>
+                                </div>
+                                <span class="badge bg-success">PC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cyber-divider"></div>
+            
+            <h2 class="section-title">NUESTROS BENEFICIOS</h2>
+            
+            <div class="row feature-section">
+                <div class="col-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Entrega Instantánea</h4>
+                        <p>Recibe tus claves de juego inmediatamente después de la compra</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h4>Mejores Precios</h4>
+                        <p>Ofrecemos los mejores precios del mercado para juegos digitales en Chile</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>100% Seguro</h4>
+                        <p>Todas las transacciones están protegidas con la última tecnología de seguridad</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cyber-divider"></div>
+            
+            <div class="platforms-section">
+                <h3>Disponible para todas las plataformas</h3>
+                <div class="platform-badges">
+                    <span class="badge bg-success fs-5 mx-2 p-2"><i class="fas fa-desktop me-2"></i>PC</span>
+                    <span class="badge bg-primary fs-5 mx-2 p-2"><i class="fab fa-playstation me-2"></i>PlayStation</span>
+                    <span class="badge bg-danger fs-5 mx-2 p-2"><i class="fab fa-xbox me-2"></i>Xbox</span>
+                    <span class="badge bg-warning text-dark fs-5 mx-2 p-2"><i class="fas fa-gamepad me-2"></i>Nintendo</span>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-6">
+                    <div class="image-placeholder">
+                        Espacio para imagen adicional<br>
+                        (Reemplazar con imagen de juego o promoción)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="image-placeholder">
+                                                Espacio para imagen adicional<br>
+                        (Reemplazar con imagen de juego o promoción)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="banner-footer">
+            <div class="row align-items-center">
+                <div class="col-8">
+                    <h3>¡Visita nuestra tienda online ahora!</h3>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-shopping-cart me-2"></i>Comprar ahora
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-tag me-2"></i>Ver ofertas
+                        </a>
+                    </div>
+                    <div class="social-icons">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-discord"></i>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <div class="qr-code">
+                        <img src="https://placehold.co/150x150?text=Scan+Me" alt="QR Code">
+                    </div>
+                    <p class="mt-2">Escanea para visitar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

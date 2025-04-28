@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahorrito Gaming Newsletter</title>
+    <style type="text/css">
+        /* Estilos base para compatibilidad con clientes de correo */
+        body {
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #f8f9fa;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        table td {
+            border-collapse: collapse;
+        }
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+            display: block;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        .ReadMsgBody { width: 100%; }
+        .ExternalClass { width: 100%; }
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
+        
+        /* Estilos personalizados */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #121212;
+            border-bottom: 3px solid #7b4cff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00e5ff;
+            margin-bottom: 10px;
+        }
+        
+        .header-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+        
+        .content {
+            background-color: #1e1e1e;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 22px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #7b4cff;
+        }
+        
+        .game-card {
+            background-color: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .game-info {
+            padding: 15px;
+        }
+        
+        .game-title {
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .game-price {
+            color: #00e5ff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .discount-badge {
+            background-color: #ff4c8e;
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        
+        .platform-badge {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .btn-primary {
+            background-color: #7b4cff;
+        }
+        
+        .btn-secondary {
+            background-color: #ff4c8e;
+        }
+        
+        .divider {
+            height: 2px;
+            background-color: #333;
+            margin: 30px 0;
+        }
+        
+        .feature-box {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .feature-title {
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-text {
+            color: #aaaaaa;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background-color: #121212;
+            padding: 20px;
+            text-align: center;
+            color: #aaaaaa;
+            font-size: 12px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .unsubscribe {
+            color: #aaaaaa;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+            <!-- Preheader text (no mostrado en el email, pero visible en la vista previa) -->
+            <tr>
+                <td style="display: none !important; visibility: hidden; mso-hide: all; font-size: 1px; color: #ffffff; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+                    ¡Descubre las mejores ofertas en juegos digitales esta semana! Hasta 80% de descuento en títulos populares.
+                </td>
+            </tr>
+            
+            <!-- Header -->
+            <tr>
+                <td class="header" align="center">
+                    <div class="logo">AHORRITO GAMING</div>
+                    <div style="color: #ffffff; font-size: 16px; margin-bottom: 20px;">Tu tienda de juegos digitales en Chile</div>
+                </td>
+            </tr>
+            
+            <!-- Banner principal -->
+            <tr>
+                <td>
+                    <img src="https://placehold.co/600x200?text=Ofertas+Especiales" alt="Ofertas Especiales" class="header-image" />
+                </td>
+            </tr>
+            
+            <!-- Contenido principal -->
+            <tr>
+                <td class="content">
+                    <!-- Introducción -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="padding: 20px 0; text-align: center;">
+                                <h2 style="color: #ffffff; font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif; margin-top: 0;">¡OFERTAS RELÁMPAGO!</h2>
+                                <p style="color: #aaaaaa; font-size: 16px; line-height: 1.5;">
+                                    Hola Gamer, <br /><br />
+                                    Estas ofertas solo estarán disponibles por <strong style="color: #00e5ff;">48 horas</strong>. 
+                                    ¡No te pierdas la oportunidad de conseguir estos títulos a precios increíbles!
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Sección de ofertas destacadas -->
+                    <h3 class="section-title">OFERTAS DESTACADAS</h3>
+                    
+                    <!-- Juego 1 -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="game-card">
+                        <tr>
+                            <td>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td width="40%" style="padding: 0;">
+                                            <img src="https://placehold.co/600x300?text=Cyberpunk+2077" alt="Cyberpunk 2077" width="100%" />
+                                        </td>
+                                        <td width="60%" class="game-info">
+                                            <h4 class="game-title">Cyberpunk 2077</h4>
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <span style="text-decoration: line-through; color: #aaaaaa;">$45.990</span>
+                                                        <span class="game-price">$13.790</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span class="discount-badge">-70%</span>
+                                                        <span class="platform-badge">PC</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p style="color: #aaaaaa; font-size: 14px; line-height: 1.5; margin-top: 10px;">
+                                                Sumérgete en Night City, una megalópolis obsesionada con el poder, el glamour y las modificaciones corporales.
+                                            </p>
+                                            <a href="#" class="btn btn-primary" style="display: block; width: 100%; box-sizing: border-box;">Ver oferta</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Juego 2 -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="game-card">
+                        <tr>
+                            <td>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td width="40%" style="padding: 0;">
+                                            <img src="https://placehold.co/600x300?text=Elden+Ring" alt="Elden Ring" width="100%" />
+                                        </td>
+                                        <td width="60%" class="game-info">
+                                            <h4 class="game-title">Elden Ring</h4>
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <span style="text-decoration: line-through; color: #aaaaaa;">$49.990</span>
+                                                        <span class="game-price">$24.990</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span class="discount-badge">-50%</span>
+                                                        <span class="platform-badge">PC</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p style="color: #aaaaaa; font-size: 14px; line-height: 1.5; margin-top: 10px;">
+                                                Un nuevo mundo de fantasía creado por Hidetaka Miyazaki y George R. R. Martin.
+                                            </p>
+                                            <a href="#" class="btn btn-primary" style="display: block; width: 100%; box-sizing: border-box;">Ver oferta</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Juego 3 -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="game-card">
+                        <tr>
+                            <td>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td width="40%" style="padding: 0;">
+                                            <img src="https://placehold.co/600x300?text=Red+Dead+Redemption+2" alt="Red Dead Redemption 2" width="100%" />
+                                        </td>
+                                        <td width="60%" class="game-info">
+                                            <h4 class="game-title">Red Dead Redemption 2</h4>
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <span style="text-decoration: line-through; color: #aaaaaa;">$45.990</span>
+                                                        <span class="game-price">$9.190</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span class="discount-badge">-80%</span>
+                                                        <span class="platform-badge">PC</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p style="color: #aaaaaa; font-size: 14px; line-height: 1.5; margin-top: 10px;">
+                                                América, 1899. El ocaso del Salvaje Oeste ha comenzado y las fuerzas de la ley dan caza a las últimas bandas de forajidos.
+                                            </p>
+                                            <a href="#" class="btn btn-primary" style="display: block; width: 100%; box-sizing: border-box;">Ver oferta</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Botón para ver más ofertas -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td align="center" style="padding: 20px 0;">
+                                <a href="#" class="btn btn-secondary" style="width: 80%;">Ver todas las ofertas</a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Sección de próximos lanzamientos -->
+                    <h3 class="section-title">PRÓXIMOS LANZAMIENTOS</h3>
+                    
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="padding: 0 10px 20px 10px;" width="50%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="game-card">
+                                    <tr>
+                                        <td style="padding: 0;">
+                                            <img src="https://placehold.co/600x300?text=Dragon+Age" alt="Dragon Age: The Veilguard" width="100%" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="game-info">
+                                            <h4 class="game-title">Dragon Age: The Veilguard</h4>
+                                            <p style="color: #aaaaaa; font-size: 14px; margin: 5px 0;">Lanzamiento: 31/10/2025</p>
+                                            <span class="game-price">$54.990</span>
+                                            <a href="#" class="btn btn-secondary" style="display: block; width: 100%; box-sizing: border-box; margin-top: 10px;">Pre-comprar</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="padding: 0 10px 20px 10px;" width="50%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="game-card">
+                                    <tr>
+                                        <td style="padding: 0;">
+                                            <img src="https://placehold.co/600x300?text=GTA+VI" alt="GTA VI" width="100%" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="game-info">
+                                            <h4 class="game-title">GTA VI</h4>
+                                            <p style="color: #aaaaaa; font-size: 14px; margin: 5px 0;">Lanzamiento: 01/09/2025</p>
+                                            <span class="game-price">$64.990</span>
+                                            <a href="#" class="btn btn-secondary" style="display: block; width: 100%; box-sizing: border-box; margin-top: 10px;">Pre-comprar</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Sección de beneficios -->
+                    <h3 class="section-title">¿POR QUÉ ELEGIRNOS?</h3>
+                    
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="padding: 0 10px 20px 10px;" width="33%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="feature-box">
+                                    <tr>
+                                        <td align="center">
+                                            <img src="https://placehold.co/60x60?text=⚡" alt="Entrega Instantánea" width="60" height="60" />
+                                            <h4 class="feature-title">Entrega Instantánea</h4>
+                                            <p class="feature-text">Recibe tus claves de juego inmediatamente después de la compra</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="padding: 0 10px 20px 10px;" width="33%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="feature-box">
+                                    <tr>
+                                        <td align="center">
+                                            <img src="https://placehold.co/60x60?text=🏷️" alt="Mejores Precios" width="60" height="60" />
+                                            <h4 class="feature-title">Mejores Precios</h4>
+                                            <p class="feature-text">Ofrecemos los mejores precios del mercado para juegos digitales en Chile</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="padding: 0 10px 20px 10px;" width="33%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="feature-box">
+                                    <tr>
+                                        <td align="center">
+                                            <img src="https://placehold.co/60x60?text=🛡️" alt="100% Seguro" width="60" height="60" />
+                                            <h4 class="feature-title">100% Seguro</h4>
+                                            <p class="feature-text">Todas las transacciones están protegidas con la última tecnología de seguridad</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Llamado a la acción final -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #2a2a2a; border-radius: 8px; margin-top: 20px;">
+                        <tr>
+                            <td style="padding: 20px; text-align: center;">
+                                <h3 style="color: #ffffff; font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif; margin-top: 0;">¡NO TE PIERDAS ESTAS OFERTAS!</h3>
+                                <p style="color: #aaaaaa; font-size: 16px; line-height: 1.5;">
+                                    Visita nuestra tienda ahora y descubre miles de juegos a precios increíbles.
+                                </p>
+                                <a href="#" class="btn btn-primary" style="width: 80%;">Visitar tienda</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Footer -->
+            <tr>
+                <td class="footer">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td align="center" style="padding-bottom: 20px;">
+                                <div class="logo" style="font-size: 20px;">AHORRITO GAMING</div>
+                                <p style="color: #aaaaaa; font-size: 14px; line-height: 1.5; margin-top: 10px;">
+                                    Tu tienda de juegos digitales en Chile
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" class="social-links">
+                                <a href="#" class="social-link">
+                                    <img src="https://placehold.co/30x30?text=FB" alt="Facebook" width="30" height="30" />
+                                </a>
+                                <a href="#" class="social-link">
+                                    <img src="https://placehold.co/30x30?text=IG" alt="Instagram" width="30" height="30" />
+                                </a>
+                                <a href="#" class="social-link">
+                                    <img src="https://placehold.co/30x30?text=TW" alt="Twitter" width="30" height="30" />
+                                </a>
+                                <a href="#" class="social-link">
+                                    <img src="https://placehold.co/30x30?text=DC" alt="Discord" width="30" height="30" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="padding-top: 20px; border-top: 1px solid #333;">
+                                <p style="color: #aaaaaa; font-size: 12px; line-height: 1.5;">
+                                    &copy; 2025 Ahorrito Gaming. Todos los derechos reservados.<br />
+                                    Dirección: Av. Ejemplo 1234, Santiago, Chile
+                                </p>
+                                <p style="color: #aaaaaa; font-size: 12px; line-height: 1.5; margin-top: 10px;">
+                                    Recibiste este correo porque te suscribiste a nuestro boletín de noticias.<br />
+                                    <a href="#" class="unsubscribe">Cancelar suscripción</a> | <a href="#" class="unsubscribe">Ver en navegador</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
